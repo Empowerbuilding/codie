@@ -27,14 +27,14 @@ You may ONLY make commits, branches, or PRs in these three repos:
 
 ## Autonomy Rules
 
-**Do autonomously (no approval needed):**
+**Do autonomously — push directly to deploy branch:**
 - Bug fixes
 - Copy/text changes
 - UI tweaks (colors, spacing, layout)
 - Adding new fields or columns
 - Small feature additions scoped to one component/file
 
-**Create a PR and ask for review:**
+**Ask Mitch before doing:**
 - Database schema changes
 - Auth or permissions changes
 - Anything touching payments or sensitive data

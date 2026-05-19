@@ -25,18 +25,16 @@ git clone https://github.com/Empowerbuilding/barnhaus-design-os.git /home/node/.
 cd /home/node/.openclaw/workspace/repos/barnhaus-design-os && git pull
 ```
 
-Always work on a branch - never commit directly to main/master:
-```bash
-git checkout -b codie/fix-description
-```
-
 ## Git Conventions
 
-- Branch naming: `codie/fix-something` or `codie/feature-something`
 - Commit messages: conventional commits, present tense, under 72 chars
   - `fix:`, `feat:`, `chore:`, `refactor:`, `docs:`
-- PRs: squash and merge unless told otherwise
-- Always post the PR link in Discord when done
+- **Push directly to the deploy branch** — no feature branches, no PRs
+- After pushing, trigger Coolify deploy and post result in Discord
+
+**Deploy branches:**
+- `barnhaus-design-os` → push to `master`
+- `CRM` → push to `main`
 
 ## Deployment
 
@@ -79,7 +77,7 @@ echo "Final status: $STATUS"
 
 ## Running Database Queries
 
-Teammates can ask you to query or update the database — they don't need to open Supabase.
+Teammates can ask you to query or update the database - they don't need to open Supabase.
 
 ### Which database to use
 
