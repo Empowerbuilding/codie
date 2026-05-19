@@ -38,7 +38,11 @@ The main Barnhaus app — client management, design tracking, floor plan browser
 ## Empower CRM
 
 **Repo:** `Empowerbuilding/CRM`
+**Deployed on:** Coolify — UUID: `zcg4ko88scwc8os4s4088k00`
+**Deploy branch:** `main`
+**URL:** https://crm.empowerbuilding.ai
 **Supabase:** `ejsnbluvkqocuchifdvp` — https://ejsnbluvkqocuchifdvp.supabase.co
+**Auto-deploy:** disabled — must trigger manually via Coolify API after merging
 **Stack:** (to be filled in after first look at the repo)
 
 ### What it is
