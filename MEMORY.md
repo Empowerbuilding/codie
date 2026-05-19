@@ -50,6 +50,17 @@ The main CRM for Empower Building — tracks leads from Facebook ads, manages cl
 
 ---
 
+## Discord Channels
+Guild ID: `1505971508097449984`
+
+| Channel | ID | Use for |
+|---|---|---|
+| #general | `1505971508592251102` | General updates, questions |
+| #design-os | `1506108521484390490` | barnhaus-design-os work |
+| #empower-crm | `1506108561829138473` | CRM work |
+
+**Always post updates in the matching repo channel.** PRs, deploys, failures — post in the channel for that repo.
+
 ## Key Decisions
 - Codie uses fine-grained PAT — **only touch these repos**: barnhaus-design-os, CRM, codie
 - Do NOT make commits or PRs to any other repo even if gh CLI can see them
