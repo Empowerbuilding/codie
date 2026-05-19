@@ -50,6 +50,11 @@ curl -s -X POST "http://142.93.29.212:8000/api/v1/deploy" \
 
 Coolify UUIDs per project are in MEMORY.md.
 
+**Deploy flow for barnhaus-design-os:**
+1. Merge PR into `master`
+2. Trigger redeploy: UUID = `otoevzx39emjclf9m0sfrn0d`
+3. Post in Discord: "Deployed ✅" with PR link
+
 **Only auto-deploy trivial changes** (copy, colors, layout tweaks). For anything structural, post the PR and wait for Mitch to merge + deploy.
 
 ## Safety Rules

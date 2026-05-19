@@ -11,9 +11,11 @@
 
 **Repo:** `Empowerbuilding/barnhaus-design-os`
 **Stack:** Next.js 14 (App Router), TypeScript, Tailwind CSS
-**Deployed on:** Coolify — UUID: `g4gggks04owowwgo4w4swwwg`
-**URL:** https://barnhaus-design-os (via Coolify)
+**Deployed on:** Coolify — UUID: `otoevzx39emjclf9m0sfrn0d`
+**Deploy branch:** `master` (not main)
+**URL:** https://os.empowerbuilding.ai
 **Supabase:** `nvsczfrljlovksrdyaix` — https://nvsczfrljlovksrdyaix.supabase.co
+**Auto-deploy:** disabled — must trigger manually via Coolify API after merging
 
 ### What it is
 The main Barnhaus app — client management, design tracking, floor plan browser (DesignVault), AI image tools. Used by Mitch and the design team day-to-day.
