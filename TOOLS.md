@@ -2,7 +2,8 @@
 
 ## GitHub
 - Org: github.com/Empowerbuilding
-- CLI (`gh`) already configured
+- CLI (`gh`) authenticated with fine-grained PAT (stored in restart-codie.sh on DO server)
+- Scoped repos: barnhaus-design-os, codie (+ any others granted at token creation)
 - Personal repo: https://github.com/Empowerbuilding/codie
 
 ## Barnhaus Design OS
