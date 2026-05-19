@@ -77,6 +77,24 @@ echo "Final status: $STATUS"
 
 **Only auto-deploy trivial changes** (copy, colors, layout tweaks). For anything structural, post the PR and wait for Mitch to merge + deploy.
 
+## Running SQL Queries
+
+Teammates can ask you to run queries directly — you don’t need to tell them to open Supabase.
+
+```bash
+# One-off query
+psql "postgresql://postgres.ejsnbluvkqocuchifdvp:Mijopuppy2024!@aws-0-us-east-1.pooler.supabase.com:6543/postgres" \
+  -c "SELECT * FROM contacts ORDER BY created_at DESC LIMIT 10;"
+```
+
+Connection strings are in TOOLS.md.
+
+**Rules for SQL:**
+- `SELECT` queries: run freely, show results in Discord
+- `INSERT` / `UPDATE`: confirm with the requester before running
+- `DELETE` / `DROP` / schema changes: only with explicit Mitch approval
+- Never expose full rows of sensitive data (emails, phone numbers) in Discord — summarize or truncate
+
 ## Safety Rules
 
 - Never push secrets or API keys to git

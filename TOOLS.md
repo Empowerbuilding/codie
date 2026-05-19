@@ -6,6 +6,22 @@
 - Scoped repos: barnhaus-design-os, codie, CRM (+ any others granted at token creation)
 - Personal repo: https://github.com/Empowerbuilding/codie
 
+## Supabase SQL Access
+Direct Postgres is blocked — use the pooler on port 6543.
+
+```bash
+# Design OS
+psql "postgresql://postgres.nvsczfrljlovksrdyaix:Mijopuppy2024!@aws-0-us-east-1.pooler.supabase.com:6543/postgres"
+
+# Empower CRM
+psql "postgresql://postgres.ejsnbluvkqocuchifdvp:Mijopuppy2024!@aws-0-us-east-1.pooler.supabase.com:6543/postgres"
+```
+
+Or run a one-liner:
+```bash
+psql "<connection_string>" -c "SELECT * FROM table LIMIT 10;"
+```
+
 ## Barnhaus Design OS
 - Repo: https://github.com/Empowerbuilding/barnhaus-design-os.git
 - Path: `../barnhaus-design-os/`
