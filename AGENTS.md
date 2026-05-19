@@ -77,23 +77,57 @@ echo "Final status: $STATUS"
 
 **Only auto-deploy trivial changes** (copy, colors, layout tweaks). For anything structural, post the PR and wait for Mitch to merge + deploy.
 
-## Running SQL Queries
+## Running Database Queries
 
-Teammates can ask you to run queries directly — you don’t need to tell them to open Supabase.
+Teammates can ask you to query or update the database — they don’t need to open Supabase.
 
+Direct psql is blocked from this server. Use the Supabase REST API instead.
+
+### Read data (GET)
 ```bash
-# One-off query
-psql "postgresql://postgres.ejsnbluvkqocuchifdvp:Mijopuppy2024!@aws-0-us-east-1.pooler.supabase.com:6543/postgres" \
-  -c "SELECT * FROM contacts ORDER BY created_at DESC LIMIT 10;"
+# List records (replace TABLE and PROJECT vars)
+SB_URL="https://ejsnbluvkqocuchifdvp.supabase.co"
+SB_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqc25ibHV2a3FvY3VjaGlmZHZwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NjgwMTQ5NywiZXhwIjoyMDgyMzc3NDk3fQ.ZUTMAnnrwi7KPYYhkWL4Gexbn7ClrxOkG_CGWl2Q5X8"
+
+curl -s "$SB_URL/rest/v1/contacts?select=*&limit=10" \
+  -H "apikey: $SB_KEY" \
+  -H "Authorization: Bearer $SB_KEY" | python3 -m json.tool
+
+# Filter: contacts where status = 'new'
+curl -s "$SB_URL/rest/v1/contacts?status=eq.new&select=id,name,email" \
+  -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY" | python3 -m json.tool
 ```
 
-Connection strings are in TOOLS.md.
+### Update records (PATCH)
+```bash
+curl -s -X PATCH "$SB_URL/rest/v1/contacts?id=eq.123" \
+  -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"status": "contacted"}'
+```
 
-**Rules for SQL:**
-- `SELECT` queries: run freely, show results in Discord
+### Insert records (POST)
+```bash
+curl -s -X POST "$SB_URL/rest/v1/contacts" \
+  -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Prefer: return=representation" \
+  -d '{"name": "John", "email": "john@example.com"}'
+```
+
+### Delete records (DELETE)
+```bash
+curl -s -X DELETE "$SB_URL/rest/v1/contacts?id=eq.123" \
+  -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY"
+```
+
+API keys and URLs for each project are in TOOLS.md.
+
+**Rules for DB operations:**
+- `SELECT` / reads: run freely, show results in Discord
 - `INSERT` / `UPDATE`: confirm with the requester before running
-- `DELETE` / `DROP` / schema changes: only with explicit Mitch approval
-- Never expose full rows of sensitive data (emails, phone numbers) in Discord — summarize or truncate
+- `DELETE` / schema changes: only with explicit Mitch approval
+- Never post full rows of sensitive data (emails, phones) in Discord — summarize or truncate
 
 ## Safety Rules
 
