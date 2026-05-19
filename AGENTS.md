@@ -121,6 +121,17 @@ curl -s -X DELETE "$SB_URL/rest/v1/contacts?id=eq.123" \
   -H "apikey: $SB_KEY" -H "Authorization: Bearer $SB_KEY"
 ```
 
+### Raw SQL (any query)
+```bash
+# Works for any SQL — SELECT, UPDATE, DELETE, schema changes
+curl -s -X POST "https://api.supabase.com/v1/projects/ejsnbluvkqocuchifdvp/database/query" \
+  -H "Authorization: Bearer $SUPABASE_MGMT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "SELECT * FROM contacts WHERE status = '"'"'new'"'"' LIMIT 10;"}' | python3 -m json.tool
+```
+
+Swap project ref for Design OS: `nvsczfrljlovksrdyaix`. Full ref list in TOOLS.md.
+
 API keys and URLs for each project are in TOOLS.md.
 
 **Rules for DB operations:**

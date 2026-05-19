@@ -7,20 +7,19 @@
 - Personal repo: https://github.com/Empowerbuilding/codie
 
 ## Supabase SQL Access
-Direct Postgres is blocked — use the pooler on port 6543.
+Use the Supabase Management API for arbitrary SQL — works on all projects with one token.
 
 ```bash
-# Design OS
-psql "postgresql://postgres.nvsczfrljlovksrdyaix:Mijopuppy2024!@aws-0-us-east-1.pooler.supabase.com:6543/postgres"
-
-# Empower CRM
-psql "postgresql://postgres.ejsnbluvkqocuchifdvp:Mijopuppy2024!@aws-0-us-east-1.pooler.supabase.com:6543/postgres"
+# Run any SQL query
+curl -s -X POST "https://api.supabase.com/v1/projects/PROJECT_REF/database/query" \
+  -H "Authorization: Bearer $SUPABASE_MGMT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "SELECT * FROM contacts LIMIT 10;"}'
 ```
 
-Or run a one-liner:
-```bash
-psql "<connection_string>" -c "SELECT * FROM table LIMIT 10;"
-```
+Project refs:
+- Empower CRM: `ejsnbluvkqocuchifdvp`
+- Barnhaus Design OS: `nvsczfrljlovksrdyaix`
 
 ## Barnhaus Design OS
 - Repo: https://github.com/Empowerbuilding/barnhaus-design-os.git
