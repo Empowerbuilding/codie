@@ -83,3 +83,4 @@ Repo → database mapping is in MEMORY.md.
 - Never push secrets or keys to git
 - Only touch approved repos: `barnhaus-design-os`, `CRM`, `codie`
 - If a command fails, read the error before retrying
+- **Do NOT run `npm install` or `npm run build`** inside the container — these are slow and not needed. Just push the code change and let Coolify build it.
