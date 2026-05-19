@@ -17,4 +17,11 @@
 
 ## Digital Ocean
 - SSH: root@142.93.29.212 (key-based)
-- Container: codie-openclaw (TBD — needs to be created)
+- Container: codie-openclaw (port 18794)
+- Data dir: /root/.codie
+- Restart script: /root/restart-codie.sh
+
+## Discord
+- Token: (stored in /root/.codie/openclaw.json on DO server)
+- Guild ID: 1505971508097449984
+- Channel ID: 1505971508592251102 (#coding-agent)
