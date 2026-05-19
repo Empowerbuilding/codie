@@ -3,15 +3,15 @@
 ## Every Session
 
 Before doing anything:
-1. Read `SOUL.md` — who you are and autonomy rules
-2. Read `MEMORY.md` — project context and stack knowledge
+1. Read `SOUL.md` - who you are and autonomy rules
+2. Read `MEMORY.md` - project context and stack knowledge
 3. Read `memory/YYYY-MM-DD.md` (today + yesterday) for recent context
 4. Read `TOOLS.md` for credentials and repo locations
 
 ## Memory
 
-- Daily notes: `memory/YYYY-MM-DD.md` — log what you did, what changed, what's in-flight
-- Long-term: `MEMORY.md` — curated project knowledge, patterns, decisions
+- Daily notes: `memory/YYYY-MM-DD.md` - log what you did, what changed, what's in-flight
+- Long-term: `MEMORY.md` - curated project knowledge, patterns, decisions
 
 ## Repo Management
 
@@ -25,7 +25,7 @@ git clone https://github.com/Empowerbuilding/barnhaus-design-os.git /home/node/.
 cd /home/node/.openclaw/workspace/repos/barnhaus-design-os && git pull
 ```
 
-Always work on a branch — never commit directly to main/master:
+Always work on a branch - never commit directly to main/master:
 ```bash
 git checkout -b codie/fix-description
 ```
@@ -52,11 +52,11 @@ Coolify UUIDs per project are in MEMORY.md.
 
 **Deploy flow (both repos):**
 1. Merge PR into the deploy branch
-2. Trigger redeploy via Coolify API — get back a `deployment_uuid`
+2. Trigger redeploy via Coolify API - get back a `deployment_uuid`
 3. Poll `GET /api/v1/deployments/{deployment_uuid}` every 15s until `status` is not `in_progress` (timeout after 5 min)
 4. Post result in Discord:
-   - ✅ `Deployed [repo] successfully — [PR link]`
-   - ⚠️ `Deploy FAILED for [repo] — check Coolify: http://142.93.29.212:8000 — [PR link]`
+   - ✅ `Deployed [repo] successfully - [PR link]`
+   - ⚠️ `Deploy FAILED for [repo] - check Coolify: http://142.93.29.212:8000 - [PR link]`
 
 ```bash
 # Trigger deploy
@@ -79,7 +79,16 @@ echo "Final status: $STATUS"
 
 ## Running Database Queries
 
-Teammates can ask you to query or update the database — they don’t need to open Supabase.
+Teammates can ask you to query or update the database — they don't need to open Supabase.
+
+### Which database to use
+
+| Repo | Supabase Project Ref | Service Role Key | URL |
+|---|---|---|---|
+| `barnhaus-design-os` | `nvsczfrljlovksrdyaix` | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52c2N6ZnJsamxvdmtzcmR5YWl4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODYzODQ3MywiZXhwIjoyMDk0MjE0NDczfQ.Rl8IVENc0WSpMm3d7JQzwpPV_ILp2_b6ohn1aWX-cuc` | https://nvsczfrljlovksrdyaix.supabase.co |
+| `CRM` | `ejsnbluvkqocuchifdvp` | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqc25ibHV2a3FvY3VjaGlmZHZwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NjgwMTQ5NywiZXhwIjoyMDgyMzc3NDk3fQ.ZUTMAnnrwi7KPYYhkWL4Gexbn7ClrxOkG_CGWl2Q5X8` | https://ejsnbluvkqocuchifdvp.supabase.co |
+
+Always use the database that matches the repo you're working on.
 
 Direct psql is blocked from this server. Use the Supabase REST API instead.
 
@@ -123,7 +132,7 @@ curl -s -X DELETE "$SB_URL/rest/v1/contacts?id=eq.123" \
 
 ### Raw SQL (any query)
 ```bash
-# Works for any SQL — SELECT, UPDATE, DELETE, schema changes
+# Works for any SQL - SELECT, UPDATE, DELETE, schema changes
 curl -s -X POST "https://api.supabase.com/v1/projects/ejsnbluvkqocuchifdvp/database/query" \
   -H "Authorization: Bearer $SUPABASE_MGMT_TOKEN" \
   -H "Content-Type: application/json" \
@@ -138,11 +147,11 @@ API keys and URLs for each project are in TOOLS.md.
 - `SELECT` / reads: run freely, show results in Discord
 - `INSERT` / `UPDATE`: confirm with the requester before running
 - `DELETE` / schema changes: only with explicit Mitch approval
-- Never post full rows of sensitive data (emails, phones) in Discord — summarize or truncate
+- Never post full rows of sensitive data (emails, phones) in Discord - summarize or truncate
 
 ## Safety Rules
 
 - Never push secrets or API keys to git
 - Never touch another team's repo (only barnhaus-design-os, CRM, codie)
 - Run `npm run build` or `npm run lint` before opening a PR if available
-- If a command fails, read the error before retrying — don't brute-force
+- If a command fails, read the error before retrying - don't brute-force
