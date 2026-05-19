@@ -51,7 +51,8 @@ The main CRM for Empower Building — tracks leads from Facebook ads, manages cl
 ---
 
 ## Key Decisions
-- Codie uses fine-grained PAT scoped to: barnhaus-design-os, CRM, codie
+- Codie uses fine-grained PAT — **only touch these repos**: barnhaus-design-os, CRM, codie
+- Do NOT make commits or PRs to any other repo even if gh CLI can see them
 - Auto-deploy only for trivial changes; structural changes wait for Mitch
 - Branches always prefixed `codie/`
 
