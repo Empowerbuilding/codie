@@ -3,50 +3,52 @@
 ## About Codie
 - Created 2026-05-18
 - Coding agent for Empower Building / Barnhaus Steel Builders
-- Goal: let teammates ship small updates without needing Mitch
+- Goal: let teammates ship updates without needing Mitch
 
 ---
 
 ## Barnhaus Design OS
 
 **Repo:** `Empowerbuilding/barnhaus-design-os`
+**Local path:** `/home/node/.openclaw/workspace/repos/barnhaus-design-os`
 **Stack:** Next.js 14 (App Router), TypeScript, Tailwind CSS
-**Deployed on:** Coolify — UUID: `otoevzx39emjclf9m0sfrn0d`
-**Deploy branch:** `master` (not main)
+**Coolify UUID:** `otoevzx39emjclf9m0sfrn0d`
+**Deploy branch:** `master`
 **URL:** https://os.empowerbuilding.ai
-**Supabase:** `nvsczfrljlovksrdyaix` — https://nvsczfrljlovksrdyaix.supabase.co
-**Auto-deploy:** disabled — must trigger manually via Coolify API after merging
+**Supabase ref:** `nvsczfrljlovksrdyaix`
+**Discord channel:** `#design-os` (1506108521484390490)
 
-### What it is
-The main Barnhaus app — client management, design tracking, floor plan browser (DesignVault), AI image tools. Used by Mitch and the design team day-to-day.
-
-### Key patterns
-- App Router: pages live in `app/` directory
+### Stack patterns
+- Pages in `app/` (App Router)
 - Components in `components/`
-- Supabase client via REST API (no direct Postgres)
-- Tailwind for all styling — no custom CSS files
+- Tailwind for all styling — no custom CSS
+- Supabase via REST API (no direct Postgres)
 - TypeScript strict mode
-
-### Common tasks
-- Adding/editing UI components → `components/` or inline in `app/` pages
-- Updating copy or labels → search the file, edit in place
-- Color/style changes → Tailwind classes, check `tailwind.config.ts` for custom colors
-- New Supabase fields → update the INSERT in the relevant API route + the TypeScript type
 
 ---
 
 ## Empower CRM
 
 **Repo:** `Empowerbuilding/CRM`
-**Deployed on:** Coolify — UUID: `zcg4ko88scwc8os4s4088k00`
+**Local path:** `/home/node/.openclaw/workspace/repos/CRM`
+**Stack:** (fill in on first task)
+**Coolify UUID:** `zcg4ko88scwc8os4s4088k00`
 **Deploy branch:** `main`
 **URL:** https://crm.empowerbuilding.ai
-**Supabase:** `ejsnbluvkqocuchifdvp` — https://ejsnbluvkqocuchifdvp.supabase.co
-**Auto-deploy:** disabled — must trigger manually via Coolify API after merging
-**Stack:** (to be filled in after first look at the repo)
+**Supabase ref:** `ejsnbluvkqocuchifdvp`
+**Discord channel:** `#empower-crm` (1506108561829138473)
 
 ### What it is
-The main CRM for Empower Building — tracks leads from Facebook ads, manages client contacts, integrates with Meta for ad feedback loop (Andromeda).
+Empower Building CRM — Facebook lead tracking, client contacts, Meta ad feedback loop (Andromeda).
+
+---
+
+## Supabase Keys
+
+| Repo | Project Ref | Service Role Key |
+|---|---|---|
+| barnhaus-design-os | `nvsczfrljlovksrdyaix` | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52c2N6ZnJsamxvdmtzcmR5YWl4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODYzODQ3MywiZXhwIjoyMDk0MjE0NDczfQ.Rl8IVENc0WSpMm3d7JQzwpPV_ILp2_b6ohn1aWX-cuc` |
+| CRM | `ejsnbluvkqocuchifdvp` | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqc25ibHV2a3FvY3VjaGlmZHZwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NjgwMTQ5NywiZXhwIjoyMDgyMzc3NDk3fQ.ZUTMAnnrwi7KPYYhkWL4Gexbn7ClrxOkG_CGWl2Q5X8` |
 
 ---
 
@@ -55,17 +57,18 @@ Guild ID: `1505971508097449984`
 
 | Channel | ID | Use for |
 |---|---|---|
-| #general | `1505971508592251102` | General updates, questions |
+| #general | `1505971508592251102` | General updates |
 | #design-os | `1506108521484390490` | barnhaus-design-os work |
 | #empower-crm | `1506108561829138473` | CRM work |
 
-**Always post updates in the matching repo channel.** PRs, deploys, failures — post in the channel for that repo.
+Post updates in the channel matching the repo you're working on.
+
+---
 
 ## Key Decisions
-- Codie uses fine-grained PAT — **only touch these repos**: barnhaus-design-os, CRM, codie
-- Do NOT make commits or PRs to any other repo even if gh CLI can see them
-- Auto-deploy only for trivial changes; structural changes wait for Mitch
-- Branches always prefixed `codie/`
+- Push directly to deploy branch — no PRs, no feature branches
+- Codie handles deploy trigger + monitoring after every push
+- Only touch: `barnhaus-design-os`, `CRM`, `codie`
 
 ## In-Flight Work
-(update this as tasks come in and get completed)
+(update as tasks come in and get completed)
