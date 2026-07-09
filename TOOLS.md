@@ -28,3 +28,22 @@
 - Channel: Render Tool edits → barnhaus-codie-render-tool
 - Post updates in the channel matching the project being worked on
 - Discord is disabled — portal is the only active channel
+
+## n8n
+- URL: https://n8n.empowerbuilding.ai
+- API Key: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkNjNkZGY4OS02ZjVlLTRmNmUtOWFhZS04YTcxMjlmMzA4ZDgiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwiaWF0IjoxNzcyMTcwNzkwfQ.pSEf_4afOWv-ohkE59RxQr5skPTgoQRoIOYRYjqCFeo
+- Header: X-N8N-API-KEY
+- Base: https://n8n.empowerbuilding.ai/api/v1
+
+### Render Tool Workflows ONLY — never touch non-RT- workflows
+- RT - Exterior Image Enhancer: up3EeeAJMwUNNrbM → rt-exterior-enhance
+- RT - Floor Plan Generate: x1VG7aLAgT97T5rL → rt-floor-plan-generate
+- RT - Floor Plan Edit: FbiGsiNOzRW2O9Zc → rt-floor-plan-edit
+- RT - Prompt Enhancer: g6ayf5ZbtxrdWkAz → rt-enhance-prompt
+- RT - Concept Card: qF82aTeVjiOpmJ13 → rt-concept-card
+- RT - Video Orchestrator Step 1: JfQD0kTWceG9iBPx → rt-video-orchestrator/enhance
+- RT - Video Orchestrator Step 2: QB4Euwhla75CNMGs → rt-video-orchestrator/generate
+- RT - Exterior Video: BR34NolETCR4i0RG → rt-concept-card-video
+- RT - Exterior Video Mobile: GzFmqQvviTmwIUBS → rt-concept-card-video-mobile
+- RT - Interior Video: P8Atx9GzMBUFDMoq → rt-interior-video
+- RT - Interior Video Mobile: rcSYwaFRIW8pIyku → rt-interior-video-mobile
