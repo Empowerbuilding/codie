@@ -22,6 +22,9 @@ git clone https://github.com/Empowerbuilding/barnhaus-design-os.git \
   /home/node/.openclaw/workspace/repos/barnhaus-design-os
 
 git clone https://github.com/Empowerbuilding/CRM.git \
+
+git clone https://github.com/Empowerbuilding/render-tool.git \
+  /home/node/.openclaw/workspace/repos/render-tool
   /home/node/.openclaw/workspace/repos/CRM
 
 # Every session — pull before making changes
@@ -33,6 +36,7 @@ cd /home/node/.openclaw/workspace/repos/<repo> && git pull
 - Commit directly to the deploy branch — no feature branches, no PRs
 - `barnhaus-design-os` → deploy branch: `master`
 - `CRM` → deploy branch: `main`
+- `render-tool` → deploy branch: `main`
 - Commit format: `fix:`, `feat:`, `chore:`, `refactor:`, `docs:` — present tense, under 72 chars
 - Git is pre-configured with credentials — just `git push origin <branch>`
 
@@ -81,6 +85,6 @@ Repo → database mapping is in MEMORY.md.
 ## Safety
 
 - Never push secrets or keys to git
-- Only touch approved repos: `barnhaus-design-os`, `CRM`, `codie`
+- Only touch approved repos: `barnhaus-design-os`, `CRM`, `codie`, `render-tool`
 - If a command fails, read the error before retrying
 - **Do NOT run `npm install` or `npm run build`** inside the container — these are slow and not needed. Just push the code change and let Coolify build it.
