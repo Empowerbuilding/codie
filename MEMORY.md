@@ -93,3 +93,7 @@ Upgraded image enhancer for Michael's team. Stores enhanced images + prompts use
 ### ⚠️ Important
 - This is the NEW version. The original at pic.barnhaussteelbuilders.com is read-only — NEVER touch `imageenhancer` repo.
 - n8n webhooks are shared with the original — same endpoints, no changes needed there.
+
+### Render Tool — Known Fixes (2026-07-09)
+- Supabase RLS: renders table has RLS disabled — anon key can insert freely, no policies needed
+- File permissions: workspace repos were root-owned. Fixed chown 1000:1000 on all of /root/.codie/workspace/. If it breaks again after a Mitch-side sync, run: chown -R 1000:1000 /root/.codie/workspace/ on the host
