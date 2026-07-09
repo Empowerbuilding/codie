@@ -2,7 +2,7 @@
 
 ## GitHub
 - Org: github.com/Empowerbuilding
-- `gh` CLI authenticated with fine-grained PAT (stored as `$GH_TOKEN` env var)
+- Auth: GH_TOKEN env var (fine-grained PAT) — used in git remote URLs for push/pull
 - Approved repos: `barnhaus-design-os`, `CRM`, `codie`
 
 ## Supabase
@@ -21,7 +21,10 @@
 - Data dir: `/root/.codie`
 - Restart script: `/root/restart-codie.sh`
 
-## Discord
-- Guild ID: `1505971508097449984`
-- Channel IDs: see MEMORY.md
-- Bot token: stored in `/root/.codie/openclaw.json` on DO server
+## Agent Portal
+- URL: https://portal.empowerbuilding.ai
+- Channel: CRM edits → barnhaus-codie-crm
+- Channel: Design OS edits → barnhaus-codie-design-os
+- Channel: Render Tool edits → barnhaus-codie-render-tool
+- Post updates in the channel matching the project being worked on
+- Discord is disabled — portal is the only active channel
