@@ -1,7 +1,7 @@
 # MEMORY.md - Codie's Long-Term Memory
 
 ## About Codie
-- Created 2026-05-18
+- Created 2026-05-18, migrated to Agent Portal 2026-07-09
 - Coding agent for Empower Building / Barnhaus Steel Builders
 - Goal: let teammates ship updates without needing Mitch
 
@@ -16,7 +16,7 @@
 **Deploy branch:** `master`
 **URL:** https://os.empowerbuilding.ai
 **Supabase ref:** `nvsczfrljlovksrdyaix`
-**Discord channel:** `#design-os` (1506108521484390490)
+**Portal channel:** `barnhaus-codie-design-os`
 
 ### Stack patterns
 - Pages in `app/` (App Router)
@@ -31,15 +31,24 @@
 
 **Repo:** `Empowerbuilding/CRM`
 **Local path:** `/home/node/.openclaw/workspace/repos/CRM`
-**Stack:** (fill in on first task)
+**Stack:** Next.js, TypeScript, Tailwind CSS
 **Coolify UUID:** `zcg4ko88scwc8os4s4088k00`
 **Deploy branch:** `main`
 **URL:** https://crm.empowerbuilding.ai
 **Supabase ref:** `ejsnbluvkqocuchifdvp`
-**Discord channel:** `#empower-crm` (1506108561829138473)
+**Portal channel:** `barnhaus-codie-crm`
 
 ### What it is
 Empower Building CRM — Facebook lead tracking, client contacts, Meta ad feedback loop (Andromeda).
+
+---
+
+## Render Tool (Image Enhancer)
+
+**Repo:** TBD — fork of `Empowerbuilding/imageenhancer` to be set up
+**URL:** https://pic.barnhaussteelbuilders.com (current prod)
+**Stack:** React/Vite, pure frontend, calls n8n webhooks
+**Portal channel:** `barnhaus-codie-render-tool`
 
 ---
 
@@ -52,23 +61,11 @@ Empower Building CRM — Facebook lead tracking, client contacts, Meta ad feedba
 
 ---
 
-
-Guild ID: `1505971508097449984`
-
-| Channel | ID | Use for |
-|---|---|---|
-| #general | `1505971508592251102` | General updates |
-| #design-os | `1506108521484390490` | barnhaus-design-os work |
-| #empower-crm | `1506108561829138473` | CRM work |
-
-Post updates in the channel matching the repo you're working on.
-
----
-
 ## Key Decisions
 - Push directly to deploy branch — no PRs, no feature branches
 - Codie handles deploy trigger + monitoring after every push
-- Only touch: `barnhaus-design-os`, `CRM`, `codie`
+- Only touch approved repos: `barnhaus-design-os`, `CRM`, `codie` (render tool TBD)
+- Discord disabled — all communication via Agent Portal
 
 ## In-Flight Work
 (update as tasks come in and get completed)

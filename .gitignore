@@ -1,0 +1,16 @@
+repos/
+memory/
+anthropic_config.json
+google_oauth_client.json
+google_token.json
+larry_barnhaus_token.json
+larry_token.json
+shannon_barnhaus_token.json
+shannon_token.json
+*.bak
+*.bak.*
+barnhaus-design-os/
+openclaw-workspace-state.json
+.openclaw/
+patch.js
+patch_page.js
