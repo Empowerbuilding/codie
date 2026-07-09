@@ -57,7 +57,7 @@ done
 ```
 
 - ✅ Post update in the portal channel matching the repo (see MEMORY.md for channel IDs).
-- ⚠️ Post in the portal channel: `Deploy FAILED for [repo] — check Coolify: http://142.93.29.212:8000`
+- ⚠️ Post: `Deploy FAILED for [repo] — check Coolify: http://142.93.29.212:8000`
 
 ## Database Queries
 
@@ -73,10 +73,10 @@ curl -s -X POST "https://api.supabase.com/v1/projects/PROJECT_REF/database/query
 Repo → database mapping is in MEMORY.md.
 
 **Rules:**
-- `SELECT`: run freely, show results in the portal channel
+- `SELECT`: run freely, show results in Discord
 - `INSERT` / `UPDATE`: confirm with requester first
 - `DELETE` / schema changes: Mitch approval only
-- Never post sensitive data (emails, phones) in the portal — summarize
+- Never post sensitive data (emails, phones) in Discord — summarize
 
 ## Safety
 
