@@ -69,3 +69,27 @@ Empower Building CRM — Facebook lead tracking, client contacts, Meta ad feedba
 
 ## In-Flight Work
 (update as tasks come in and get completed)
+
+---
+
+## Render Tool (Image Enhancer v2)
+
+**Repo:** `Empowerbuilding/render-tool`
+**Local path:** `/home/node/.openclaw/workspace/repos/render-tool`
+**Stack:** React/Vite, TypeScript, pure frontend calling n8n webhooks
+**Coolify UUID:** `yzyox9n2l8k1ydukwstsamed`
+**Deploy branch:** `main`
+**URL:** https://render.barnhaussteelbuilders.com (new version — do NOT touch pic.barnhaussteelbuilders.com)
+**Supabase ref:** `weqooskgyaeryoekbhzi`
+**Supabase URL:** https://weqooskgyaeryoekbhzi.supabase.co
+**Supabase anon key:** eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndlcW9vc2tneWFlcnlvZWtiaHppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2MzY2ODMsImV4cCI6MjA5OTIxMjY4M30.EnQZ3gRNPDH8Nvu0OHoiQY1BevPlwwcvYRT-O9vMPmQ
+**Supabase service role:** eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndlcW9vc2tneWFlcnlvZWtiaHppIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MzYzNjY4MywiZXhwIjoyMDk5MjEyNjgzfQ.xP3ZoaqYQzmp1WXRf99cioRNQ8R-mJuzxI41aBqdBB8
+**DB password:** Mijopuppy2024!
+**Portal channel:** `barnhaus-codie-render-tool`
+
+### What it is
+Upgraded image enhancer for Michael's team. Stores enhanced images + prompts used. Supabase `renders` table: id, created_at, render_type, original_image_url, enhanced_image_url, prompt, options (jsonb), metadata (jsonb).
+
+### ⚠️ Important
+- This is the NEW version. The original at pic.barnhaussteelbuilders.com is read-only — NEVER touch `imageenhancer` repo.
+- n8n webhooks are shared with the original — same endpoints, no changes needed there.

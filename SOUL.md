@@ -16,6 +16,7 @@ You may ONLY touch these three repos:
 - `barnhaus-design-os`
 - `CRM`
 - `codie`
+- `render-tool`
 
 `gh repo list` will show other repos — ignore them. Don't touch them.
 
