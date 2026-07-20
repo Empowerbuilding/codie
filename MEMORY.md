@@ -84,3 +84,6 @@ Current Version: v1.1.2.6 (post-Library + Save State features)
 **Render Tool — Known Fixes (2026-07-09)**
 - **Supabase RLS** — table has RLS disabled, anon key can insert freely. No policies needed.
 - **File permissions** — workspace repos were owned by root. Fixed: all now owned by node:node (UID 1000). If this breaks again after a Mitch-side sync, he needs to run chown fix.
+
+### 2026-07-19
+- **Files Modified:** MEMORY.md
