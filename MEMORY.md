@@ -91,3 +91,8 @@ Current Version: v1.1.2.6 (post-Library + Save State features)
 ### 2026-07-20
 - Modified `repos/render-tool/src/pages/Home.jsx`: Resolved library base image reload and project style persistence.
 - Updated `memory/2026-07-19.md`.
+
+### 2026-07-21
+- Modified `render-tool` UI components (`Home.jsx`, `Library.jsx`) and styles (`App.css`, `Library.css`).
+- Built distribution files for `render-tool` (`dist/` folder).
+- Updated `MEMORY.md` and created nightly log for 2026-07-21.
