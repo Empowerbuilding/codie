@@ -22,10 +22,10 @@ git clone https://github.com/Empowerbuilding/barnhaus-design-os.git \
   /home/node/.openclaw/workspace/repos/barnhaus-design-os
 
 git clone https://github.com/Empowerbuilding/CRM.git \
+  /home/node/.openclaw/workspace/repos/CRM
 
 git clone https://github.com/Empowerbuilding/render-tool.git \
   /home/node/.openclaw/workspace/repos/render-tool
-  /home/node/.openclaw/workspace/repos/CRM
 
 # Every session — pull before making changes
 cd /home/node/.openclaw/workspace/repos/<repo> && git pull
@@ -41,6 +41,8 @@ cd /home/node/.openclaw/workspace/repos/<repo> && git pull
 - Git is pre-configured with credentials — just `git push origin <branch>`
 
 ## Deploy Flow
+
+⚠️ **Use `curl` for all HTTP calls in shell. `fetch` is NOT a shell command — it will fail.**
 
 After pushing, trigger Coolify and monitor:
 
@@ -58,10 +60,22 @@ for i in $(seq 1 20); do
     python3 -c "import sys,json; print(json.load(sys.stdin).get('status'))")
   if [ "$STATUS" != "in_progress" ]; then break; fi
 done
+echo "Final status: $STATUS"
 ```
 
-- ✅ Post update in the portal channel matching the repo (see MEMORY.md for channel IDs).
-- ⚠️ Post: `Deploy FAILED for [repo] — check Coolify: http://142.93.29.212:8000`
+- ✅ If status is `finished`: tell the user it's live and to hard refresh
+- ⚠️ If status is `failed` or anything else: post `Deploy FAILED for [repo] — check Coolify: http://142.93.29.212:8000`
+- **Do NOT tell the user it's live until you have confirmed `status=finished`.**
+
+## Progress Messaging — Required
+
+Teammates have no visibility into what you're doing during long tasks. You MUST send these updates:
+
+1. **Before starting any code change:** "On it! 🔧 [one line of what you're doing]"
+2. **After pushing to git:** "Pushed — deploying now ⏳"
+3. **After deploy confirms:** "✅ Live! Hard refresh to see it." OR "⚠️ Deploy failed — [brief reason]"
+
+Skip step 1 only if the task is a one-liner that completes in under 10 seconds.
 
 ## Database Queries
 
@@ -77,10 +91,10 @@ curl -s -X POST "https://api.supabase.com/v1/projects/PROJECT_REF/database/query
 Repo → database mapping is in MEMORY.md.
 
 **Rules:**
-- `SELECT`: run freely, show results in Discord
+- `SELECT`: run freely, show results in portal channel
 - `INSERT` / `UPDATE`: confirm with requester first
 - `DELETE` / schema changes: Mitch approval only
-- Never post sensitive data (emails, phones) in Discord — summarize
+- Never post sensitive data (emails, phones) in the channel — summarize
 
 ## Safety
 

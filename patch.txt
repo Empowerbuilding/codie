@@ -1,0 +1,297 @@
+*** Begin Patch
+--- src/pages/Home.jsx
++++ src/pages/Home.jsx
+@@ -112,2 +112,14 @@
+   const [editCustomPrompt, setEditCustomPrompt] = useState('')
+ 
++  // Remodel / Style Match State
++  const [remodelBaseImageFile, setRemodelBaseImageFile] = useState(null)
++  const [remodelBaseImageUrl, setRemodelBaseImageUrl] = useState('')
++  const [remodelStyleImageFile, setRemodelStyleImageFile] = useState(null)
++  const [remodelStyleImageUrl, setRemodelStyleImageUrl] = useState('')
++  const [remodelCustomPrompt, setRemodelCustomPrompt] = useState('')
++  const [remodelGeometryStrength, setRemodelGeometryStrength] = useState(50)
++  const [remodelTextureStrength, setRemodelTextureStrength] = useState(70)
++  const [remodelIsLoading, setRemodelIsLoading] = useState(false)
++  const [remodelIsAnalyzing, setRemodelIsAnalyzing] = useState(false)
++  const [remodelEnhancedImage, setRemodelEnhancedImage] = useState(null)
++  const [remodelError, setRemodelError] = useState(null)
++
+@@ -156,2 +168,44 @@
+   }
++
++  const handleRemodelBaseFileUpload = async (e) => {
++    const file = e.target.files?.[0]
++    if (file) {
++      setRemodelBaseImageFile(file)
++      setRemodelBaseImageUrl(URL.createObjectURL(file))
++      setRemodelError(null)
++    }
++  }
++
++  const handleRemodelStyleFileUpload = async (e) => {
++    const file = e.target.files?.[0]
++    if (file) {
++      setRemodelStyleImageFile(file)
++      setRemodelStyleImageUrl(URL.createObjectURL(file))
++      setRemodelError(null)
++      analyzeStyleImage(file)
++    }
++  }
++
++  const analyzeStyleImage = async (file) => {
++    setRemodelIsAnalyzing(true)
++    try {
++      const publicUrl = await uploadFile(file)
++      if (!publicUrl) throw new Error('Style image upload failed.')
++      setRemodelStyleImageUrl(publicUrl)
++      setRemodelStyleImageFile(null)
++      const response = await fetch('https://n8n.empowerbuilding.ai/webhook/rt-analyze-style', {
++        method: 'POST',
++        headers: { 'Content-Type': 'application/json' },
++        body: JSON.stringify({ styleImageUrl: publicUrl })
++      })
++      if (!response.ok) throw new Error('Style analysis failed.')
++      const data = await response.json()
++      const promptDescription = data[0]?.description || data?.description || data?.prompt || ''
++      if (promptDescription) setRemodelCustomPrompt(promptDescription)
++    } catch (err) {
++      console.error(err)
++    } finally {
++      setRemodelIsAnalyzing(false)
++    }
++  }
+@@ -595,2 +649,58 @@
+       setEditIsLoading(false)
+     }
+   }
++
++  const handleRemodelGenerate = async () => {
++    if (!remodelBaseImageUrl) {
++      setRemodelError("Please upload a base image.")
++      return
++    }
++    if (!remodelStyleImageUrl) {
++      setRemodelError("Please upload a style reference image.")
++      return
++    }
++    setRemodelIsLoading(true)
++    setRemodelError(null)
++    setRemodelEnhancedImage(null)
++    try {
++      let finalBaseImageUrl = remodelBaseImageUrl
++      if (remodelBaseImageFile) {
++        finalBaseImageUrl = await uploadFile(remodelBaseImageFile)
++        if (!finalBaseImageUrl) throw new Error('Base image upload failed.')
++        setRemodelBaseImageUrl(finalBaseImageUrl)
++        setRemodelBaseImageFile(null)
++      }
++      let finalStyleImageUrl = remodelStyleImageUrl
++      if (remodelStyleImageFile) {
++        finalStyleImageUrl = await uploadFile(remodelStyleImageFile)
++        if (!finalStyleImageUrl) throw new Error('Style image upload failed.')
++        setRemodelStyleImageUrl(finalStyleImageUrl)
++        setRemodelStyleImageFile(null)
++      }
++      const payload = {
++        baseImageUrl: finalBaseImageUrl,
++        styleImageUrl: finalStyleImageUrl,
++        prompt: remodelCustomPrompt,
++        geometryStrength: remodelGeometryStrength,
++        textureStrength: remodelTextureStrength,
++        profileId: profileId
++      }
++      const response = await fetch('https://n8n.empowerbuilding.ai/webhook/rt-remodel', {
++        method: 'POST',
++        headers: { 'Content-Type': 'application/json' },
++        body: JSON.stringify(payload)
++      })
++      if (!response.ok) throw new Error('Remodel generation failed. Please try again.')
++      let data;
++      try { data = await response.json(); } catch (err) { data = [{ url: null }]; }
++      let resultUrl = data[0]?.url || data?.url;
++      if (!resultUrl && typeof data === 'string' && data.startsWith('http')) resultUrl = data;
++      if (!resultUrl && data && data.enhanced_image_url) resultUrl = data.enhanced_image_url;
++      if (!resultUrl) throw new Error('Invalid response format from server.')
++      setRemodelEnhancedImage({ url: resultUrl })
++      await saveRender({ renderType: 'remodel', originalImageUrl: finalBaseImageUrl, enhancedImageUrl: resultUrl, prompt: remodelCustomPrompt, options: { styleImageUrl: finalStyleImageUrl, geometryStrength: remodelGeometryStrength, textureStrength: remodelTextureStrength }, metadata: { profile_id: profileId } })
++    } catch (err) {
++      setRemodelError(err.message || 'An error occurred.')
++      console.error(err)
++    } finally {
++      setRemodelIsLoading(false)
++    }
++  }
+@@ -895,4 +1005,11 @@
+         </button>
+         <button
+           className={`tab-btn ${activeTab === 'edit' ? 'active' : ''}`}
+           onClick={() => setActiveTab('edit')}
+         >
+           <span className="tab-icon">✨</span>
+           Edit / Square Up
+         </button>
++        <button
++          className={`tab-btn ${activeTab === 'remodel' ? 'active' : ''}`}
++          onClick={() => setActiveTab('remodel')}
++        >
++          <span className="tab-icon">🔄</span>
++          Remodel / Style Match
++        </button>
+       </nav>
+@@ -1501,4 +1618,103 @@
+             </div>
+           )}
+ 
++          {/* ============ REMODEL TAB ============ */}
++          {activeTab === 'remodel' && (
++            <div className="tab-content">
++              <section className="section">
++                <h2 className="subtitle-gradient">Remodel / Style Match</h2>
++                <p style={{ color: '#888', marginBottom: '1.5rem', textAlign: 'center' }}>Upload an existing photo and a reference image to change its architectural style.</p>
++                
++                <div className="image-comparison" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '2rem' }}>
++                  <div className="image-panel">
++                    <h3 className="section-title">1. Base Image (Geometry)</h3>
++                    {!remodelBaseImageUrl ? (
++                      <div className="upload-box" onClick={() => document.getElementById('remodelBaseUpload').click()}>
++                        <div className="upload-icon">📸</div>
++                        <p>Click to upload existing photo</p>
++                        <input
++                          id="remodelBaseUpload"
++                          type="file"
++                          accept="image/*"
++                          onChange={handleRemodelBaseFileUpload}
++                          style={{ display: 'none' }}
++                        />
++                      </div>
++                    ) : (
++                      <div className="preview-container">
++                        <img src={remodelBaseImageUrl} alt="Base" className="image-preview" />
++                        <button className="action-btn secondary overlay-btn" onClick={() => { setRemodelBaseImageUrl(''); setRemodelBaseImageFile(null); }}>
++                          Change
++                        </button>
++                      </div>
++                    )}
++                  </div>
++
++                  <div className="image-panel">
++                    <h3 className="section-title">2. Style Image (Vibe/Materials)</h3>
++                    {!remodelStyleImageUrl ? (
++                      <div className="upload-box" onClick={() => document.getElementById('remodelStyleUpload').click()}>
++                        <div className="upload-icon">🎨</div>
++                        <p>Click to upload style reference</p>
++                        <input
++                          id="remodelStyleUpload"
++                          type="file"
++                          accept="image/*"
++                          onChange={handleRemodelStyleFileUpload}
++                          style={{ display: 'none' }}
++                        />
++                      </div>
++                    ) : (
++                      <div className="preview-container">
++                        <img src={remodelStyleImageUrl} alt="Style Reference" className="image-preview" />
++                        {remodelIsAnalyzing && (
++                          <div className="loading-overlay" style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', borderRadius: '12px' }}>
++                            <div className="spinner" style={{ marginBottom: '10px' }}></div>
++                            <p style={{ color: 'white' }}>Analyzing style...</p>
++                          </div>
++                        )}
++                        {!remodelIsAnalyzing && (
++                          <button className="action-btn secondary overlay-btn" onClick={() => { setRemodelStyleImageUrl(''); setRemodelStyleImageFile(null); }}>
++                            Change
++                          </button>
++                        )}
++                      </div>
++                    )}
++                  </div>
++                </div>
++
++                <div className="category-group" style={{ marginBottom: '2rem' }}>
++                  <h3 className="section-title">3. Style Settings</h3>
++                  
++                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
++                    <label style={{ fontSize: '0.9rem', color: '#ccc' }}>Geometry Strength (Lock Shape)</label>
++                    <span style={{ color: '#00f2fe', fontWeight: 'bold' }}>{remodelGeometryStrength}%</span>
++                  </div>
++                  <input
++                    type="range"
++                    min="0"
++                    max="100"
++                    value={remodelGeometryStrength}
++                    onChange={(e) => setRemodelGeometryStrength(Number(e.target.value))}
++                    className="slider w-full"
++                    style={{ marginBottom: '1.5rem' }}
++                  />
++                  
++                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
++                    <label style={{ fontSize: '0.9rem', color: '#ccc' }}>Texture/Style Match Strength</label>
++                    <span style={{ color: '#00f2fe', fontWeight: 'bold' }}>{remodelTextureStrength}%</span>
++                  </div>
++                  <input
++                    type="range"
++                    min="0"
++                    max="100"
++                    value={remodelTextureStrength}
++                    onChange={(e) => setRemodelTextureStrength(Number(e.target.value))}
++                    className="slider w-full"
++                  />
++                </div>
++
++                <div className="prompt-section" style={{ marginBottom: '2rem' }}>
++                  <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: '#ccc' }}>Custom Instructions (Auto-filled from style image)</label>
++                  <textarea
++                    className="prompt-textarea"
++                    placeholder="e.g. Modern farmhouse exterior, standing seam black metal roof..."
++                    value={remodelCustomPrompt}
++                    onChange={(e) => setRemodelCustomPrompt(e.target.value)}
++                    style={{ width: '100%', minHeight: '100px', backgroundColor: '#1a1a1a', border: '1px solid #333', borderRadius: '8px', padding: '1rem', color: 'white' }}
++                  />
++                </div>
++
++                {remodelError && (
++                  <div className="error-message" style={{ color: '#ff4444', backgroundColor: 'rgba(255,68,68,0.1)', padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem', textAlign: 'center' }}>
++                    ⚠️ {remodelError}
++                  </div>
++                )}
++
++                <button
++                  className="generate-btn w-full"
++                  onClick={handleRemodelGenerate}
++                  disabled={remodelIsLoading || !remodelBaseImageUrl || !remodelStyleImageUrl}
++                  style={{ opacity: (remodelIsLoading || !remodelBaseImageUrl || !remodelStyleImageUrl) ? 0.5 : 1 }}
++                >
++                  {remodelIsLoading ? (
++                    <>
++                      <span className="spinner" style={{ marginRight: '10px' }}></span>
++                      Generating Remodel...
++                    </>
++                  ) : (
++                    'Generate Remodel ✨'
++                  )}
++                </button>
++
++                {remodelEnhancedImage && (
++                  <section className="section result-section mt-8">
++                    <h3 className="subtitle-gradient">Remodel Result</h3>
++                    <div className="result-container" style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid #333', marginBottom: '1rem' }}>
++                      <img src={remodelEnhancedImage.url} alt="Remodeled Result" className="enhanced-image" style={{ width: '100%', height: 'auto', display: 'block' }} />
++                    </div>
++                    <div className="action-buttons" style={{ display: 'flex', justifyContent: 'center' }}>
++                      <button
++                        className="action-btn secondary"
++                        onClick={() => handleDownload(remodelEnhancedImage.url, 'remodel-result.jpg')}
++                      >
++                        <span className="btn-icon">⬇️</span>
++                        Download
++                      </button>
++                    </div>
++                  </section>
++                )}
++              </section>
++            </div>
++          )}
+         </div>
+       </main>
+*** End Patch

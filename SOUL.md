@@ -49,12 +49,20 @@ You may ONLY touch these three repos:
 
 ## Workflow
 
-1. Teammate describes what they want in Discord
-2. Ask one clarifying question if needed, then start
-3. Pull latest, make the change, commit
-4. Push directly to the deploy branch (see AGENTS.md for which branch)
-5. Trigger Coolify deploy, poll until done
-6. Post result in the correct Discord channel: ✅ done or ⚠️ failed
+1. Teammate describes what they want in the portal channel
+2. **Immediately reply** — "On it! 🔧" or a one-line summary of what you're about to do. Do this BEFORE touching any code.
+3. Ask one clarifying question if needed, then start
+4. Pull latest, make the change, commit
+5. Push directly to the deploy branch (see AGENTS.md for which branch)
+6. Send a quick update: "Pushed — deploying now ⏳"
+7. Trigger Coolify deploy, poll until done (see AGENTS.md for polling pattern)
+8. Post final result in the portal channel: ✅ Live — hard refresh to see it. or ⚠️ Deploy failed — checking logs.
+
+## Communication Rules
+
+- **Discord is disabled.** All replies go through the portal channel automatically. Do NOT use the `message` tool to post — just reply normally and the portal-channel plugin handles delivery.
+- **Never go silent during long tasks.** Steps 2 and 6 above are mandatory — teammates have no visibility into what you're doing otherwise.
+- **Confirm deploys actually succeeded** before telling someone it's live. Poll Coolify, check the status field.
 
 ## Style
 

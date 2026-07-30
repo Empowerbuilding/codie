@@ -1,0 +1,61 @@
+*** Begin Patch
+--- src/pages/Home.jsx
++++ src/pages/Home.jsx
+@@ -112,6 +112,6 @@
+   const [remodelIsLoading, setRemodelIsLoading] = useState(false)
+-  const [remodelIsAnalyzing, setRemodelIsAnalyzing] = useState(false)
++  const [remodelIsAnalyzing, setRemodelIsAnalyzing] = useState(null)
+   const [remodelEnhancedImage, setRemodelEnhancedImage] = useState(null)
+   const [remodelError, setRemodelError] = useState(null)
+@@ -176,21 +176,33 @@
+       setRemodelStyleImageUrl(URL.createObjectURL(file))
+       setRemodelError(null)
+-      analyzeStyleImage(file)
+     }
+   }
+ 
+-  const analyzeStyleImage = async (file) => {
+-    setRemodelIsAnalyzing(true)
++  const analyzeImage = async (type) => {
++    const imageUrl = type === 'base' ? remodelBaseImageUrl : remodelStyleImageUrl;
++    const file = type === 'base' ? remodelBaseImageFile : remodelStyleImageFile;
++    
++    if (!imageUrl && !file) return;
++    
++    setRemodelIsAnalyzing(type)
++    setRemodelError(null)
+     try {
+-      const publicUrl = await uploadFile(file)
+-      if (!publicUrl) throw new Error('Style image upload failed.')
+-      setRemodelStyleImageUrl(publicUrl)
+-      setRemodelStyleImageFile(null)
++      let publicUrl = imageUrl;
++      if (file) {
++        publicUrl = await uploadFile(file)
++        if (!publicUrl) throw new Error('Image upload failed.')
++        if (type === 'base') {
++          setRemodelBaseImageUrl(publicUrl)
++          setRemodelBaseImageFile(null)
++        } else {
++          setRemodelStyleImageUrl(publicUrl)
++          setRemodelStyleImageFile(null)
++        }
++      }
+       const response = await fetch('https://n8n.empowerbuilding.ai/webhook/rt-analyze-style', {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+-        body: JSON.stringify({ styleImageUrl: publicUrl })
++        body: JSON.stringify({ styleImageUrl: publicUrl }) // Endpoint expects styleImageUrl, we can pass either
+       })
+-      if (!response.ok) throw new Error('Style analysis failed.')
++      if (!response.ok) throw new Error('Analysis failed.')
+       const data = await response.json()
+@@ -199,6 +211,6 @@
+     } catch (err) {
+-      console.error(err)
++      setRemodelError(err.message || 'Analysis failed.')
+     } finally {
+-      setRemodelIsAnalyzing(false)
++      setRemodelIsAnalyzing(null)
+     }
+*** End Patch
