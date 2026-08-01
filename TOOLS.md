@@ -45,6 +45,7 @@ When calling n8n from code or directly, these are the only valid URLs for the re
 | Enhance interior image | same as exterior — this workflow handles both | `{ imageUrl, prompt }` |
 | Generate floor plan (2D→3D) | `https://n8n.empowerbuilding.ai/webhook/rt-floor-plan-generate` | `{ floorPlanUrl }` |
 | Edit existing floor plan | `https://n8n.empowerbuilding.ai/webhook/rt-floor-plan-edit` | `{ currentFloorPlanUrl, editPrompt }` |
+| Generate Texture (Albedo) | `https://n8n.empowerbuilding.ai/webhook/rt-texture-creator` | `{ imageUrl, prompt }` |
 | Edit / Square Up (Outpaint) | `https://n8n.empowerbuilding.ai/webhook/rt-image-edit` | `{ imageUrl, targetRatio, expandDirection, prompt, profileId }` |
 | Enhance a prompt | `https://n8n.empowerbuilding.ai/webhook/rt-enhance-prompt` | `{ prompt, imageUrl }` |
 | Create concept card | `https://n8n.empowerbuilding.ai/webhook/rt-concept-card` | `{ ... }` |

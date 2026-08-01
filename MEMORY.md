@@ -79,6 +79,12 @@ Current Version: v1.1.2.6 (post-Library + Save State features)
 
 ## SECTION D — RECENT SESSION NOTES (Trimmable — max 20k chars, trim entries >60 days old)
 
+### 2026-08-01
+- **Render Tool:** Added new "Texture Creator" tab integrated with n8n webhook (`rt-texture-creator`) using Gemini flash to generate seamless albedo textures. Updated version to v1.1.5.1.
+- **Files Modified:** `src/pages/Home.jsx`, `src/App.jsx`, `TOOLS.md`.
+
+
+
 ### 2026-07-09 — Known Fixes
 
 **Render Tool — Known Fixes (2026-07-09)**
@@ -132,3 +138,8 @@ Current Version: v1.1.2.6 (post-Library + Save State features)
 ### 2026-07-30
 - **Workspace Updates:** Modified core identity/instructions files (`SOUL.md`, `AGENTS.md`, `MEMORY.md`) and handled various JSON templates and text patches.
 - **repos/render-tool:** Modified frontend code (`src/App.jsx`, `src/pages/Home.jsx`). Created and ran scripts for n8n webhooks, workflow updates, CORS handling, and error logic.
+
+### 2026-07-31
+- Checked modified workspace files.
+- Automated nightly workspace sync and memory commit.
+- Executed nightly memory log task.
