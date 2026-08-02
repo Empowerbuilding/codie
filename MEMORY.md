@@ -143,3 +143,8 @@ Current Version: v1.1.2.6 (post-Library + Save State features)
 - Checked modified workspace files.
 - Automated nightly workspace sync and memory commit.
 - Executed nightly memory log task.
+
+### 2026-08-01 (Nightly Sync)
+- Modified `render-tool` (`Home.jsx`, `Library.jsx`) to add "remove from library" button to modal and update state.
+- Automated nightly workspace sync and memory commit.
+- Added 'Texture Creator' tab in render-tool, hooked up rt-texture-creator n8n webhook, bumped version to v1.1.5.1.
