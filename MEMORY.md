@@ -189,3 +189,8 @@ Current Version: v1.1.2.6 (post-Library + Save State features)
 - Checked workspace files modified today.
 - Identified updates to `MEMORY.md` and `memory/2026-08-09.md` reflecting UI/logic patching in the render-tool.
 - Automated nightly memory log generated and workspace synced.
+
+### 2026-08-11
+- **Render Tool:** Added "view angle" to project style presets and customizable prompt bubbles for dynamic prompt injection.
+- **Render Tool (Video Update):** Replaced post-render video option with a dedicated "Video (Animate)" tab with Start/End toggles, Camera Movement, Speed, and Format options. Fixed React crash on the new tab.
+- **Render Tool (Video UI Fixes):** Upgraded Video tab upload containers to the standard custom UI (Drag & Drop, URL, paste) and fixed `onDrop` parsing for both internal URLs and raw OS files.
