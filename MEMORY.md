@@ -194,3 +194,12 @@ Current Version: v1.1.2.6 (post-Library + Save State features)
 - **Render Tool:** Added "view angle" to project style presets and customizable prompt bubbles for dynamic prompt injection.
 - **Render Tool (Video Update):** Replaced post-render video option with a dedicated "Video (Animate)" tab with Start/End toggles, Camera Movement, Speed, and Format options. Fixed React crash on the new tab.
 - **Render Tool (Video UI Fixes):** Upgraded Video tab upload containers to the standard custom UI (Drag & Drop, URL, paste) and fixed `onDrop` parsing for both internal URLs and raw OS files.
+
+### 2026-08-12
+- Updated main `MEMORY.md` project context.
+- Appended/Updated previous daily log (`2026-08-11.md`).
+- Made changes to `render-tool` frontend:
+  - `src/App.css`
+  - `src/pages/Home.jsx`
+  - `src/projectStyleOptions.js`
+- Built frontend assets for `render-tool` (`dist/` directory updated).
