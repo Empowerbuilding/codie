@@ -66,6 +66,7 @@ When calling n8n from code or directly, these are the only valid URLs for the re
 - RT - Concept Card: `qF82aTeVjiOpmJ13`
 - RT - Video Orchestrator Step 1: `JfQD0kTWceG9iBPx`
 - RT - Video Orchestrator Step 2: `QB4Euwhla75CNMGs`
+- RT - Image Edit / Outpaint: `8XLUwv88etraqHtR`
 - RT - Exterior Video: `BR34NolETCR4i0RG`
 - RT - Exterior Video Mobile: `GzFmqQvviTmwIUBS`
 - RT - Interior Video: `P8Atx9GzMBUFDMoq`
