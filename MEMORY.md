@@ -203,3 +203,8 @@ Current Version: v1.1.2.6 (post-Library + Save State features)
   - `src/pages/Home.jsx`
   - `src/projectStyleOptions.js`
 - Built frontend assets for `render-tool` (`dist/` directory updated).
+
+### 2026-08-13
+- Automated nightly memory log generated.
+- Fixed React crash on render load caused by deprecated projectStyle keys in older renders (added safety check to getProjectStylePrompt).
+- Fixed typo in setInteriorShowPreview for interior drag/drop.
