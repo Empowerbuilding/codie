@@ -208,3 +208,10 @@ Current Version: v1.1.2.6 (post-Library + Save State features)
 - Automated nightly memory log generated.
 - Fixed React crash on render load caused by deprecated projectStyle keys in older renders (added safety check to getProjectStylePrompt).
 - Fixed typo in setInteriorShowPreview for interior drag/drop.
+
+### 2026-08-14
+- Fixed Render Tool library "Load to Generator" button so it properly loads inputs and output images for remodel, texture, and edit tabs.
+- Fixed a bug where saving renders on the edit tab would fail/corrupt because it was sending positional arguments instead of an object to saveRender.
+- Fixed typo seteditShowPreview / setexteriorShowPreview.
+- Added MaskEditor component and integrated it into the Edit/Square Up tab.
+- Users can now draw a mask over the image and we send maskBase64 in the payload to the rt-image-edit webhook.
