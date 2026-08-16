@@ -37,37 +37,38 @@
 
 ### ⚠️ Render Tool Webhooks — USE THESE EXACT URLS. Do NOT invent webhook paths.
 
-When calling n8n from code or directly, these are the only valid URLs for the render tool:
+When calling n8n from code or directly, these are the only valid URLs for the render tool.
+**Verified against the live frontend on 2026-08-16** — check `grep -rhoE "webhook/[a-zA-Z0-9/_-]+" src/` in the repo if in doubt.
 
-| What you want to do | Full webhook URL | Payload |
-|---|---|---|
-| Enhance exterior image | `https://n8n.empowerbuilding.ai/webhook/rt-exterior-enhance` | `{ imageUrl, prompt }` |
-| Enhance interior image | same as exterior — this workflow handles both | `{ imageUrl, prompt }` |
-| Generate floor plan (2D→3D) | `https://n8n.empowerbuilding.ai/webhook/rt-floor-plan-generate` | `{ floorPlanUrl }` |
-| Edit existing floor plan | `https://n8n.empowerbuilding.ai/webhook/rt-floor-plan-edit` | `{ currentFloorPlanUrl, editPrompt }` |
-| Generate Texture (Albedo) | `https://n8n.empowerbuilding.ai/webhook/rt-texture-creator` | `{ imageUrl, prompt }` |
-| Edit / Square Up (Outpaint) | `https://n8n.empowerbuilding.ai/webhook/rt-image-edit` | `{ imageUrl, targetRatio, expandDirection, prompt, profileId }` |
-| Enhance a prompt | `https://n8n.empowerbuilding.ai/webhook/rt-enhance-prompt` | `{ prompt, imageUrl }` |
-| Create concept card | `https://n8n.empowerbuilding.ai/webhook/rt-concept-card` | `{ ... }` |
-| Video (wide) | `https://n8n.empowerbuilding.ai/webhook/rt-concept-card-video` | `{ renderUrl }` |
-| Video (mobile) | `https://n8n.empowerbuilding.ai/webhook/rt-concept-card-video-mobile` | `{ renderUrl }` |
-| Interior video (wide) | `https://n8n.empowerbuilding.ai/webhook/rt-interior-video` | `{ renderUrl }` |
-| Interior video (mobile) | `https://n8n.empowerbuilding.ai/webhook/rt-interior-video-mobile` | `{ renderUrl }` |
-| Video orchestrator step 1 | `https://n8n.empowerbuilding.ai/webhook/rt-video-orchestrator/enhance` | `{ images, format, enhancementPrompt }` |
-| Video orchestrator step 2 | `https://n8n.empowerbuilding.ai/webhook/rt-video-orchestrator/generate` | pass back step 1 result |
+**Image workflows all use `gemini-3.1-flash-image-preview`; video workflows use `veo-3.1-generate-preview`.**
+
+| What you want to do | Full webhook URL |
+|---|---|
+| Enhance exterior/interior image | `https://n8n.empowerbuilding.ai/webhook/rt-exterior-enhance` |
+| Remodel | `https://n8n.empowerbuilding.ai/webhook/rt-remodel` |
+| Generate Texture (Albedo) | `https://n8n.empowerbuilding.ai/webhook/rt-texture-creator` |
+| Edit / Square Up (Outpaint) | `https://n8n.empowerbuilding.ai/webhook/rt-image-edit` |
+| Analyze style | `https://n8n.empowerbuilding.ai/webhook/rt-analyze-style` |
+| Lot placement | `https://n8n.empowerbuilding.ai/webhook/rt-lot-placement` |
+| Exterior video (wide) | `https://n8n.empowerbuilding.ai/webhook/rt-concept-card-video` |
+| Exterior video (mobile) | `https://n8n.empowerbuilding.ai/webhook/rt-concept-card-video-mobile` |
+| Interior video (wide) | `https://n8n.empowerbuilding.ai/webhook/rt-interior-video` |
+| Interior video (mobile) | `https://n8n.empowerbuilding.ai/webhook/rt-interior-video-mobile` |
+
+Payload shapes: read the calling code in `repos/render-tool/src/` — it is the source of truth.
+
+**Deprecated — no longer called by the app (do NOT wire new features to these):** `rt-floor-plan-generate`, `rt-floor-plan-edit`, `rt-concept-card` (image), `rt-enhance-prompt`, `rt-video-orchestrator/*`.
 
 **Never use `render-v2`, `enhance`, `exterior`, or any other invented path — they do not exist and will 404.**
 
 ### Workflow IDs (for editing workflows via API)
 - RT - Exterior Image Enhancer: `up3EeeAJMwUNNrbM`
-- RT - Floor Plan Generate: `x1VG7aLAgT97T5rL`
-- RT - Floor Plan Edit: `FbiGsiNOzRW2O9Zc`
-- RT - Prompt Enhancer: `g6ayf5ZbtxrdWkAz`
-- RT - Concept Card: `qF82aTeVjiOpmJ13`
-- RT - Video Orchestrator Step 1: `JfQD0kTWceG9iBPx`
-- RT - Video Orchestrator Step 2: `QB4Euwhla75CNMGs`
+- RT - Remodel: `OPECXhpzvymkFzAw` (⚠️ duplicate also active: `7vHyMGBXFDS804oo`)
+- RT - Texture Creator: `F1FjqvnaitpUDPRe`
 - RT - Image Edit / Outpaint: `8XLUwv88etraqHtR`
+- RT - Analyze Style: `YuEbOkC67vVfCDTy`
 - RT - Exterior Video: `BR34NolETCR4i0RG`
 - RT - Exterior Video Mobile: `GzFmqQvviTmwIUBS`
 - RT - Interior Video: `P8Atx9GzMBUFDMoq`
 - RT - Interior Video Mobile: `rcSYwaFRIW8pIyku`
+- (Deprecated: Floor Plan Generate `x1VG7aLAgT97T5rL`, Floor Plan Edit `FbiGsiNOzRW2O9Zc`, Prompt Enhancer `g6ayf5ZbtxrdWkAz`, Concept Card `qF82aTeVjiOpmJ13`, Video Orchestrator `JfQD0kTWceG9iBPx`/`QB4Euwhla75CNMGs`)
