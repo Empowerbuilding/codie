@@ -239,3 +239,9 @@ Current Version: v1.1.2.6 (post-Library + Save State features)
 - Quiet day — only routine memory maintenance (MEMORY.md consolidation commit `4b5ef84`, nightly log commit `4425dd2`). No repo code changes (CRM, barnhaus-design-os, render-tool untouched), no deploys, no teammate requests.
 - Carry-over: ⚠️ git push divergence on `Empowerbuilding/codie` still unresolved (local `master` vs `origin/main`, no common ancestor, push 403) — awaiting Mitch's decision; not merging/force-pushing autonomously.
 - Reminder: `.gitignore` ignores `memory/` — daily logs need `git add -f`.
+
+### 2026-08-20
+- **Render Tool fix shipped:** commit `7c3eb33` (Aug 19, 20:40 UTC) — fall back to enhanced image when loading old renders whose blob URLs are dead (`App.jsx` + `Home.jsx`, +17/−10). Pushed to `main`; local and origin in sync.
+- Otherwise routine memory maintenance; no changes in `CRM` or `barnhaus-design-os`.
+- Carry-over: ⚠️ git push divergence on `Empowerbuilding/codie` still unresolved (local `master` vs `origin/main`, no common ancestor, push 403) — awaiting Mitch's decision; not merging/force-pushing autonomously.
+- Reminder: `.gitignore` ignores `memory/` — daily logs need `git add -f`.
