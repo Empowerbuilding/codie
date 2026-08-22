@@ -245,3 +245,12 @@ Current Version: v1.1.2.6 (post-Library + Save State features)
 - Otherwise routine memory maintenance; no changes in `CRM` or `barnhaus-design-os`.
 - Carry-over: ⚠️ git push divergence on `Empowerbuilding/codie` still unresolved (local `master` vs `origin/main`, no common ancestor, push 403) — awaiting Mitch's decision; not merging/force-pushing autonomously.
 - Reminder: `.gitignore` ignores `memory/` — daily logs need `git add -f`.
+
+### 2026-08-21
+- **All-day Render Tool session with Michael** — versions v1.1.7.2 → v1.2.4.5 (last commit `7daaf23`), all deploys finished.
+- **2K images:** patched 5 n8n image workflows with `generationConfig.imageConfig.imageSize: "2K"` (Exterior Enhancer, Remodel ×2, Texture Creator, Image Edit). Verified 2730×1536 output. No "Nano Banana 3" exists; 4K needs `gemini-3-pro-image`.
+- **Video upgrades:** all 4 Veo workflows → 1080p (requires 8s duration); added 4s/8s Clip Length selector (4s→720p, 8s→1080p auto-paired). Camera movement was never working (hardcoded prompts, broken interpolation) — rewrote Build Veo Request in both exterior video workflows. Removed unsupported 1:1/5:4 formats. Audio removal via Cloudinary `ac_none,q_auto:best` rewrite (Veo rejects `generateAudio:false`).
+- **Keyframe Assist (major feature):** new Video-tab mode — outpaint to clip ratio → derive start/end keyframes (zoom/pan/tilt = Cloudinary URL crops; dolly = new n8n workflow `RT - Keyframe Next` `4qbMLXKUNcHr1k9U` / webhook `rt-keyframe-next`; orbit = single-frame only, image models can't orbit) → Veo start+end. **Veo constraint: lastFrame requires 1080p/8s.** Now the ONLY video mode. Polish: Life & Motion chips, qualitative Move Amount, prompt previews (frontend sends `fullPrompt`, workflow uses verbatim), anti-morph + slim positive-only start-end prompt (no directional phrase, no scene description).
+- **9:16 fixes:** mobile video outpaint + edit workflow now enforce `imageConfig.aspectRatio`; Edit tab has 9:16 option. Library "Load to Video" button feeds KeyframeAssist.
+- **Gotchas learned:** n8n API-created webhook workflows need `webhookId` set manually or path never registers; read API keys from TOOLS.md at runtime (retyped keys get corrupted); video attachments don't come through the portal.
+- **Open items:** `rt-lot-placement` webhook unwired (pre-existing, flagged); interior video workflows orphaned; TOOLS.md webhook table stale (Mitch to update); pending hidden "HQ 4K" toggle idea awaiting Michael's go.
