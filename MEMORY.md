@@ -58,6 +58,7 @@ What it is: Empower Building CRM — Facebook lead tracking, client contacts, Me
 **Supabase ref:** `weqooskgyaeryoekbhzi`
 **Supabase URL:** https://weqooskgyaeryoekbhzi.supabase.co
 **Portal channel:** `barnhaus-codie-render-tool`
+🚧 **NEXT UP: Canvas workflow UI build.** Research complete (20 rounds, 2026-08-22/23). READ `/home/node/.openclaw/workspace/RENDER-WORKFLOW-BUILD-SPEC.md` FIRST — it has the locked architecture (plate → recipe stack → sibling iterations → auto-checkpoints → finalize), UI design, QC rubric, and open questions. Michael is driving this project.
 ⚠️ This is the NEW version. NEVER touch `imageenhancer` repo or pic.barnhaussteelbuilders.com.
 n8n webhooks are shared with the original — same endpoints.
 Supabase `renders` table: id, created_at, render_type, original_image_url, enhanced_image_url, prompt, options (jsonb), metadata (jsonb).
@@ -254,3 +255,15 @@ Current Version: v1.1.2.6 (post-Library + Save State features)
 - **9:16 fixes:** mobile video outpaint + edit workflow now enforce `imageConfig.aspectRatio`; Edit tab has 9:16 option. Library "Load to Video" button feeds KeyframeAssist.
 - **Gotchas learned:** n8n API-created webhook workflows need `webhookId` set manually or path never registers; read API keys from TOOLS.md at runtime (retyped keys get corrupted); video attachments don't come through the portal.
 - **Open items:** `rt-lot-placement` webhook unwired (pre-existing, flagged); interior video workflows orphaned; TOOLS.md webhook table stale (Mitch to update); pending hidden "HQ 4K" toggle idea awaiting Michael's go.
+
+### 2026-08-22 — Texture/workflow research marathon (17 rounds + sims, Michael driving)
+- **Massive R&D day on Render Tool texture application & edit workflow** — no production code shipped; findings locked into `RENDER-WORKFLOW-BUILD-SPEC.md` (read it before building the Canvas workflow UI).
+- **Test n8n workflows built (left active):** `RT - Texture Apply TEST` (`MXJ9EbgRu3P2udV6`, webhook `rt-texture-apply-test`, supports optional `maskUrl` region-guide param) and `RT - Segment Mask TEST` (`kefe537pWlMhZeNT`, webhook `rt-segment-mask-test`, Gemini binary segmentation masks). Test outputs: Cloudinary `home-designs/tests/` + Supabase `renders/tests/`.
+- **Core findings:** clean base anchor beats AI-processed base; multi-swatch single-pass degrades fidelity; hybrid one-shot (text-described materials + swatches only for exact/custom) = best single pass (8.5/10). Rule: "describe by default, swatch when exact, mask when it must be pixel-perfect." Region-guided AI edit (mask as LOCATION HINT, model regenerates full frame) 9/10 — beats manual PIL compositing (shelf fallback only).
+- **Melt characterization:** chained edits degrade at depth 3+ (sky = canary, gen 5 ≈ 5/10); intended edits persist, environment/sharpness melt. Fix = recipe stack + auto re-baseline (compose full recipe from plate after 2 edits).
+- **FINAL ARCHITECTURE v3 (locked):** raw upload → one plate pass using production exterior-tool prompt verbatim → edits chain from plate (max depth 2) → checkpoints/finals compose full recipe from styled plate → permanent depth-2 quality ceiling. 10-step Doug-journey sim validated end-to-end (FINAL v3 8/10, warm lighting survives).
+- **Real-user case (Doug Banks, profile_id=banks):** his 4-edit chain melted + inverted intent; stacked-recipe replay from clean base scored 8.5 vs his 5.5. His uploads: t8d79eoyma.png, zlcxpl0m5an.png (clean base).
+- **Hard case identified:** spatial/circulation geometry (perpendicular driveway apron) fails both text and region-guided edits — handle at compose stage or via user-drawn masks. Material swaps are solved.
+- **QC spec (Michael's catch):** completeness-only QC misses invented elements (unrequested wainscots, deleted foundation plinth). Build dual QC: recipe completeness + plate-vs-final invention diff; major inventions → re-roll, minor → user "keep or revert?". Human approval layer stays.
+- Process note: Michael called out my earlier mistake of re-posting prior results instead of running his requested new test. Media attachments via `workspace/media-out/` confirmed working in portal.
+- **Status:** research COMPLETE; next step is Canvas workflow UI build, awaiting Michael's go.
