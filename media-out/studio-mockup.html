@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+  body { background:#0A0A0A; color:#D1D5DB; width:1600px; height:1000px; overflow:hidden; }
+  .tabs { display:flex; gap:6px; padding:14px 20px 0 20px; border-bottom:1px solid #252525; }
+  .tab { padding:10px 22px; background:#1a1a1a; color:#a1a1aa; border-radius:8px 8px 0 0; font-size:14px; }
+  .tab.active { background:#252525; color:#DAA520; border:1px solid #B8860B; border-bottom:none; font-weight:600; }
+  .main { display:flex; height:calc(100% - 51px); }
+
+  /* LEFT: reference tray */
+  .tray { width:230px; padding:16px 14px; border-right:1px solid #252525; display:flex; flex-direction:column; gap:12px; }
+  .tray h3, .stage h3, .hist h3 { font-size:11px; letter-spacing:1.5px; color:#6b7280; text-transform:uppercase; margin-bottom:2px; }
+  .refslot { background:#252525; border:1px solid #333; border-radius:10px; padding:8px; }
+  .refimg { height:86px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:12px; color:#a1a1aa; }
+  .refimg.swatch { background:#4d4238; }
+  .refimg.lot { background:#3a4234; }
+  .refimg.empty { background:#1a1a1a; border:1px dashed #444; color:#555; }
+  .reflabel { margin-top:6px; background:#333; border:1px solid #444; border-radius:6px; padding:5px 8px; font-size:11px; color:#D1D5DB; }
+  .basecheck { display:flex; align-items:center; gap:7px; margin-top:7px; font-size:11px; color:#a1a1aa; }
+  .cb { width:14px; height:14px; border-radius:3px; border:1px solid #555; display:inline-block; }
+  .cb.on { background:#B8860B; border-color:#DAA520; position:relative; }
+  .cb.on:after { content:"✓"; color:#fff; font-size:10px; position:absolute; top:0px; left:2px; }
+  .plateslot { background:#252525; border:1px solid #B8860B; border-radius:10px; padding:8px; }
+  .plateimg { height:86px; border-radius:6px; background:#2e3540; display:flex; align-items:center; justify-content:center; font-size:12px; color:#cbd5e1; }
+
+  /* CENTER: canvas */
+  .stage { flex:1; display:flex; flex-direction:column; padding:16px 20px 12px 20px; gap:10px; }
+  .stagehead { display:flex; justify-content:space-between; align-items:center; }
+  .stepbadge { font-size:13px; color:#DAA520; background:rgba(184,134,11,.1); border:1px solid #B8860B; padding:5px 14px; border-radius:16px; }
+  .canvas { position:relative; flex:1; border-radius:12px; overflow:hidden; border:1px solid #333; display:flex; }
+  .half { flex:1; display:flex; align-items:center; justify-content:center; font-size:20px; }
+  .before { background:#2e3540; color:#8a97a8; }
+  .after  { background:#3d4a3a; color:#b7c9ad; }
+  .wipe { position:absolute; top:0; bottom:0; left:50%; width:3px; background:#DAA520; }
+  .wipe .knob { position:absolute; top:50%; left:-14px; width:31px; height:31px; border-radius:50%; background:#B8860B; color:#fff; display:flex; align-items:center; justify-content:center; font-size:13px; transform:translateY(-50%); }
+  .cornerlabel { position:absolute; top:12px; font-size:11px; letter-spacing:1px; padding:4px 10px; border-radius:6px; background:rgba(0,0,0,.55); color:#D1D5DB; }
+  .masktool { position:absolute; bottom:12px; left:12px; background:rgba(0,0,0,.6); border:1px solid #555; border-radius:8px; padding:8px 14px; font-size:12px; color:#D1D5DB; }
+  .siblings { display:flex; gap:10px; align-items:center; }
+  .sib { width:104px; height:60px; border-radius:8px; background:#3d4a3a; border:2px solid transparent; display:flex; align-items:center; justify-content:center; font-size:11px; color:#9fb096;}
+  .sib.sel { border-color:#DAA520; }
+  .sib.alt { background:#44503f; }
+  .sib.plus { background:#1a1a1a; border:1px dashed #444; color:#555; font-size:20px; }
+  .siblabel { font-size:11px; color:#6b7280; margin-right:4px; width:70px; }
+  .actions { display:flex; gap:10px; }
+  .btn { padding:11px 26px; border-radius:9px; font-size:14px; font-weight:600; }
+  .approve { background:#B8860B; color:#fff; }
+  .reroll { background:#333; color:#D1D5DB; border:1px solid #555; }
+  .revise { background:#252525; color:#a1a1aa; border:1px solid #444; }
+  .promptrow { display:flex; gap:10px; align-items:center; }
+  .prompt { flex:1; background:#252525; border:1px solid #444; border-radius:10px; padding:13px 16px; font-size:14px; color:#a1a1aa; }
+  .stackrow { display:flex; align-items:center; gap:8px; font-size:12px; color:#6b7280; }
+  .stackrow .chev { color:#DAA520; }
+
+  /* RIGHT: history rail */
+  .hist { width:190px; border-left:1px solid #252525; padding:16px 14px; display:flex; flex-direction:column; gap:9px; position:relative; }
+  .hitem { display:flex; gap:8px; align-items:center; }
+  .hthumb { width:64px; height:40px; border-radius:6px; flex:none; display:flex; align-items:center; justify-content:center; font-size:9px; color:#93a3b8; background:#2e3540; }
+  .hthumb.g { background:#37412f; color:#a9bb9c; }
+  .htext { font-size:11px; color:#a1a1aa; line-height:1.25; }
+  .hplate .hthumb { border:1px solid #B8860B; }
+  .hck { background:rgba(184,134,11,.08); border:1px dashed #B8860B; border-radius:8px; padding:5px 8px; font-size:10px; color:#DAA520; }
+  .hcur { background:#252525; border-radius:8px; padding:5px; border:1px solid #444; }
+  .ckbtn { position:absolute; bottom:16px; left:14px; right:14px; padding:13px 0; text-align:center; border-radius:10px; background:#B8860B; color:#fff; font-weight:700; font-size:13px; box-shadow:0 0 18px rgba(218,165,32,.45); }
+  .cksub { position:absolute; bottom:64px; left:14px; right:14px; text-align:center; font-size:10px; color:#DAA520; }
+</style>
+</head>
+<body>
+  <div class="tabs">
+    <div class="tab">Exterior</div><div class="tab">Interior</div><div class="tab">Remodel</div>
+    <div class="tab">Texture</div><div class="tab">Edit</div><div class="tab">Video</div>
+    <div class="tab active">✦ Studio</div>
+  </div>
+  <div class="main">
+    <div class="tray">
+      <h3>Base / Plate</h3>
+      <div class="plateslot">
+        <div class="plateimg">PLATE · 2K render</div>
+        <div class="basecheck"><span class="cb on"></span> Base image (anchor)</div>
+      </div>
+      <h3 style="margin-top:6px">References</h3>
+      <div class="refslot">
+        <div class="refimg swatch">stone swatch</div>
+        <div class="reflabel">stone wainscot — exact match</div>
+        <div class="basecheck"><span class="cb"></span> Base image</div>
+      </div>
+      <div class="refslot">
+        <div class="refimg lot">site photo</div>
+        <div class="reflabel">lot photo — raw upload</div>
+        <div class="basecheck"><span class="cb"></span> Base image</div>
+      </div>
+      <div class="refslot">
+        <div class="refimg empty">+ add reference</div>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="stagehead">
+        <div class="stepbadge">Step 4 · “swap garage doors to wood” · awaiting approval</div>
+        <div class="stackrow"><span class="chev">▼</span> Prompt stack (4 steps) — click to expand</div>
+      </div>
+      <div class="canvas">
+        <div class="half before">BEFORE — approved base</div>
+        <div class="half after">AFTER — candidate #2</div>
+        <div class="wipe"><div class="knob">⇔</div></div>
+        <div class="cornerlabel" style="left:12px">BEFORE</div>
+        <div class="cornerlabel" style="right:12px">AFTER</div>
+        <div class="masktool">✏️ Draw mask</div>
+      </div>
+      <div class="siblings">
+        <div class="siblabel">Attempts:</div>
+        <div class="sib alt">#1</div>
+        <div class="sib sel">#2 ✓</div>
+        <div class="sib plus">↻</div>
+        <div style="flex:1"></div>
+        <div class="actions">
+          <div class="btn revise">✎ Revise</div>
+          <div class="btn reroll">↻ Re-roll</div>
+          <div class="btn approve">✓ Approve → next</div>
+        </div>
+      </div>
+      <div class="promptrow">
+        <div class="prompt">Tell Studio what to change next…</div>
+      </div>
+    </div>
+
+    <div class="hist">
+      <h3>History</h3>
+      <div class="hitem hplate"><div class="hthumb">PLATE</div><div class="htext">Styled plate</div></div>
+      <div class="hitem"><div class="hthumb g">1</div><div class="htext">Siding → wood-metal</div></div>
+      <div class="hitem"><div class="hthumb g">2</div><div class="htext">Remove wainscot</div></div>
+      <div class="hck">⛳ Checkpoint A · quality refresh ✓</div>
+      <div class="hitem"><div class="hthumb g">3</div><div class="htext">Cedar columns</div></div>
+      <div class="hitem hcur"><div class="hthumb g">4</div><div class="htext"><b style="color:#DAA520">Step 4 (current)</b><br>garage doors → wood</div></div>
+      <div class="htext" style="font-size:10px;color:#555">click any step = branch from here</div>
+      <div class="cksub">3 edits since last checkpoint</div>
+      <div class="ckbtn">⛳ CHECKPOINT</div>
+    </div>
+  </div>
+</body>
+</html>

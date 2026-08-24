@@ -51,6 +51,21 @@ A checkpoint/recipe-based iterative design workflow for the Render Tool: user up
 **One primitive everywhere:** generate N siblings → gate → commit. Gate = QC grader (auto-checkpoints), user (steps/manual checkpoints/finalize), or QC-then-user fallback. Build ONE iteration/approval component + ONE recipe-commit path, reuse everywhere. Checkpoints are steps authored by "system."
 - Finalize is ALWAYS a human gate, never silent.
 
+## 5b. Concrete screen layout (Michael, 2026-08-23 21:42 UTC) — "Studio" tab
+New tab; existing single-shot tools untouched (reused as engines). Side-by-side DNA like existing tabs.
+- **Main canvas** (large, front): current working image; **before/after always shown** (approved base vs new candidate).
+- **Reference tray** (side): 2-3 image slots (swatches / lot photos / style refs), each with a small descriptive text box — the labeled-inputs pattern from texture experiments.
+- **Base-image checkbox** on any loaded image → marks the plate/anchor; composes always run from the flagged image.
+- **Main prompt bar**: free-text "what to do next" → generates next candidate.
+- **Approve / Re-roll** per candidate. Approve → becomes working image + commits step to recipe. Re-roll → new sibling from same base.
+- **History bar** (linear strip / scroll): every approved step as thumbnail; click to go back (decision pending: view-only vs branch-from-here — Codie recommends branch-from-here w/ confirm).
+- **Checkpoint button, bottom-right, always present**: lights up after 3-4 approved edits; manual press anytime → checkpoint compose presented for accept/reject like any candidate.
+- **Prompt stack dropdown** (collapsible arrow): full accumulated recipe text, collapsed by default.
+- **Mask/draw button** on main canvas → existing MaskEditor overlay; drawn mask attaches to next gen as region guide.
+- Design priority: LOTS going on — keep it organized and clean.
+- DECIDED (2026-08-23 22:43): history rewind = **branch-from-here** (w/ confirm; discards/parks later steps). Before/after = Codie's pick → **slider wipe on desktop, tap A/B toggle on mobile**.
+- Remaining open UI decision: silent vs toast on auto-checkpoint.
+
 ## 6. Backend / infra notes
 - Test n8n workflows (active, promote or rebuild for production):
   - `RT - Texture Apply TEST` — id `MXJ9EbgRu3P2udV6`, webhook `rt-texture-apply-test`. Accepts base + labeled swatches `{textures:[{slot,url}]}` + optional `maskUrl` region-guide param.
