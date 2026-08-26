@@ -86,3 +86,36 @@ New tab; existing single-shot tools untouched (reused as engines). Side-by-side 
 
 ## 8. Key experiment scores (for reference)
 Hybrid one-shot 8.5-9 · region-guided edit 9 · clean-base swatch 8 · recipe-recovery 7.5 · masked composite 7 (zero-drift fallback only) · approved-ref one-shot 6 (camera drift — recipe-recovery/onboarding only). FINAL v4 9/10 (best), v5 8.5 w/ auto-guides, v6 validated selective-mask + drawn driveway + anti-drift pins. Safe edit budget between checkpoints: 2-3.
+
+---
+
+## 9. V2 VISION — "Right on the first generation" (Michael, 2026-08-26 00:41 UTC)
+
+**Insight from live client usage (Banks, designing his whole house in Studio):** today users construct designs step-by-step because generation #1 starts from nothing. Front-load the design decisions with a visual picker so gen #1 is ~80% right, and Studio becomes fine-tuning (3-4 corrective steps) instead of construction (12+).
+
+### 9.1 Guided setup wizard (visual-first, minimal words)
+1. **Room/scene type** — kitchen / bath / living / exterior / lot.
+2. **Style cards** — 8-10 curated archetypes per room type (modern rustic, scandi, industrial farmhouse, hill-country contemporary...). Each card = pre-tested hidden prompt block + curated reference image set. Start with ~3 styles to validate.
+3. **Element checklist** — clickable elements w/ size variants: island (S/M/L), dining table ✓, built-in desk ✓, floating stairs ✓, pantry wall ✓, firepit ✓, pool ✓... Unchecked = EXPLICITLY EXCLUDED in prompt (kills invention drift: no bonus doors/windows — not checked, not built).
+4. **Material palette** — swatch grid (white-oak rift-cut, honed concrete, calacatta, matte black metal...). Click-assign to cabinetry / counters / floor / hardscape. Each swatch = clean seamless texture image (Texture Creator output) + locked text description → no rainbow drift, ever. User uploads also allowed.
+
+### 9.2 Compile → mega first generation
+Wizard output compiles into ONE compose call: photoreal plate + style refs + assigned swatches + element list + layout brief. Equivalent to 10 manual steps. Studio inherits the result as step 0 with the recipe pre-populated (each checked element = a recipe line), so checkpoints replay the full design from day one.
+
+### 9.3 Step-zero plate normalization
+Auto-detect draft CG plates (Enscape/SketchUp screenshots: unlit ceilings, placeholder textures) → offer/auto-run photoreal pass (Remodel-style) BEFORE Studio starts. Root fix for residual rainbow: CG drafts give COLOR/TEXTURE LOCK nothing real to anchor to. (Banks' own Project-1 flow, productized.)
+
+### 9.4 Existing pieces this reuses
+- Style presets + prompt bubbles (exterior tab) → style cards
+- Texture Creator → material swatch library
+- Numbered ref slots + label-driven framing → swatch assignment
+- Layout+materials vision spec (`rt-studio-layout-spec`) + pure recipe replay (v1.2.9.x) → compile + checkpoint machinery
+Mostly assembly + curation, not new tech. New builds: picker UI, preset/swatch library (Michael curates), compile step.
+
+### 9.5 Build sequence (agreed direction)
+1. **QC grader + geometry outline guide** (already spec'd §4 + 2026-08-25 session): auto-score texture-vs-plate + layout-vs-spec, invention-diff audit (fridge vanishing / door adding), silent re-rolls; outline guide = recipe-item footprints drawn as colored vectors ON the clean plate (segmentation reads melted image, outputs coordinates only — zero degraded pixels). Biggest iteration cut.
+2. **Step-zero plate normalization** (§9.3).
+3. **Picker v1** — 3 styles + ~10 swatches + element checklist for kitchens; validate on Banks' real usage; expand.
+
+### 9.6 Cost context (measured 2026-08-25, real usageMetadata)
+~$0.05 per 2K generation, layout spec <$0.01 (cached per approved image). Full heavy day (Larry + Banks + Michael, 108 studio gens) ≈ $6.50. Images are not the cost concern — Veo video is; gate video for client access. Cutting steps is about TIME and iteration quality: batch multi-changes per edit, checkpoint every 2-3 edits, draft-1K/finalize-2K split when Finalize ships.

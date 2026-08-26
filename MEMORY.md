@@ -62,7 +62,8 @@ What it is: Empower Building CRM — Facebook lead tracking, client contacts, Me
 ⚠️ This is the NEW version. NEVER touch `imageenhancer` repo or pic.barnhaussteelbuilders.com.
 n8n webhooks are shared with the original — same endpoints.
 Supabase `renders` table: id, created_at, render_type, original_image_url, enhanced_image_url, prompt, options (jsonb), metadata (jsonb).
-Current Version: v1.1.2.6 (post-Library + Save State features)
+Current Version: v1.2.9.1 (Studio pure-recipe-replay checkpoints — see memory/2026-08-25.md)
+Studio checkpoint architecture (LOCKED 2026-08-25): compose = clean plate + material refs + recipe text + composited step masks + TEXT layout spec from `rt-studio-layout-spec` vision workflow (`KM1Tj25Nq2PbGyrc`). NEVER pass the approved working image into a compose — that was the melt cause. Next build: QC grader (auto-score texture-vs-plate + layout-vs-spec, silent rerolls).
 
 ---
 
