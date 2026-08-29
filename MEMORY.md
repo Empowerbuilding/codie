@@ -151,3 +151,7 @@ Studio checkpoint architecture (LOCKED 2026-08-25): compose = clean plate + mate
 ### 2026-08-27
 - Quiet day — no workspace or repo changes since midnight; 2026-08-26 activity already consolidated and committed (`2d35e96` consolidation, `63ef26f` nightly log). Git tree clean, nothing in-flight.
 - Carry-over unchanged: QC grader top of Studio queue awaiting go; geometry outline guide spec'd; test workflows rt-texture-apply-test / rt-segment-mask-test still pending cleanup.
+
+### 2026-08-28
+- Quiet day — only change was MEMORY.md consolidation commit `078a068` (2026-08-27 rollup). Git tree clean, no repo work or deploys in-flight.
+- Carry-over unchanged: QC grader top of Studio queue; geometry outline guide spec'd; test workflows pending cleanup.
