@@ -155,3 +155,7 @@ Studio checkpoint architecture (LOCKED 2026-08-25): compose = clean plate + mate
 ### 2026-08-28
 - Quiet day — only change was MEMORY.md consolidation commit `078a068` (2026-08-27 rollup). Git tree clean, no repo work or deploys in-flight.
 - Carry-over unchanged: QC grader top of Studio queue; geometry outline guide spec'd; test workflows pending cleanup.
+
+### 2026-08-29
+- Quiet day — MEMORY.md Section D trimmed (July stale notes removed, backup `MEMORY.md.bak-20260828`); consolidation commit `582960c` already landed. No commits in barnhaus-design-os, CRM, or render-tool since 2026-08-28; no deploys in-flight.
+- Carry-over unchanged: QC grader top of Studio queue; geometry outline guide spec'd; test workflows rt-texture-apply-test / rt-segment-mask-test pending cleanup.
