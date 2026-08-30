@@ -81,41 +81,21 @@ Studio checkpoint architecture (LOCKED 2026-08-25): compose = clean plate + mate
 
 ## SECTION D — RECENT SESSION NOTES (Trimmable — max 20k chars, trim entries >60 days old)
 
-### July 2026 rollup (condensed 2026-08-28 — full detail in git memory/2026-07-*.md)
-- Render Tool foundations: library base-image reload + project-style persistence fixes (7/20-21); "Edit / Square Up" tab + n8n integration + dynamic prompt preview (7/22); webhook/CORS/error-logic scripting (7/30).
-- Known fixes that still apply: Supabase RLS disabled on render table (anon key inserts freely, no policies needed); workspace repos must be owned node:node — re-chown after any Mitch-side sync.
-- Most other July nights: no repo changes, nightly cron only.
+### July → 2026-08-20 rollup (condensed 2026-08-30 — full detail in git memory/*.md)
+- Render Tool feature run-up: Edit/Square Up tab, Texture Creator (v1.1.5.1), 8/8 frontend overhaul + nginx.conf, view-angle presets + prompt bubbles, "Video (Animate)" tab, MaskEditor on Edit tab (maskBase64 → rt-image-edit), library Load-to-Generator + saveRender positional-args fixes, getProjectStylePrompt crash guard.
+- Standing fixes: Supabase RLS disabled on render table (anon inserts freely); workspace repos must stay node:node-owned — re-chown after any Mitch-side sync; `.gitignore` ignores memory/ — daily logs need `git add -f`.
+- ⚠️ STILL OPEN (needs Mitch): nightly push to `Empowerbuilding/codie` 403 — local `master` and `origin/main` share NO common ancestor; not merging autonomously.
 
-### 2026-08-01 → 08-10 rollup (condensed 2026-08-28 — full detail in git memory/2026-08-*.md)
-- Texture Creator tab shipped (rt-texture-creator webhook, Gemini seamless albedo textures, v1.1.5.1); "remove from library" modal button.
-- 8/8: extensive frontend overhaul — upload boxes, home sections, asset-palette masonry, exterior/interior flows, nginx.conf added; 8/9-10: Python patch tooling (convert_textarea.py, fix_paste.py, patch_library.py, patch_asset_palette.py).
-- Other days: routine memory maintenance only.
+### 2026-08-21 (condensed 2026-08-30 — full detail in git memory/2026-08-21.md)
+- All-day Render Tool session w/ Michael: v1.1.7.2 → v1.2.4.5 (`7daaf23`). 2K images across 5 image workflows (`imageConfig.imageSize: "2K"`; 4K would need `gemini-3-pro-image`). All 4 Veo workflows → 1080p/8s + 4s→720p clip selector; camera-movement prompt build rewritten; audio removal via Cloudinary `ac_none,q_auto:best` (Veo rejects `generateAudio:false`).
+- **Keyframe Assist shipped — now the ONLY video mode:** outpaint to clip ratio → start/end keyframes (zoom/pan/tilt = Cloudinary crops; dolly = `RT - Keyframe Next` `4qbMLXKUNcHr1k9U` / webhook `rt-keyframe-next`; orbit single-frame only) → Veo start+end. Veo constraint: lastFrame requires 1080p/8s. 9:16 outpaint/edit fixes; Library "Load to Video" feeds KeyframeAssist.
+- Gotchas: n8n API-created webhook workflows need `webhookId` set manually or path never registers; read API keys from TOOLS.md at runtime; video attachments don't come through the portal.
+- Open: `rt-lot-placement` unwired; interior video workflows orphaned; hidden "HQ 4K" toggle idea awaiting Michael.
 
-### 2026-08-11 → 08-20 rollup (condensed 2026-08-28 — full detail in git memory/2026-08-*.md)
-- Render Tool: view-angle in project style presets + customizable prompt bubbles (8/11); "Video (Animate)" tab replaced post-render video — Start/End toggles, camera movement, speed, format + standard upload UI (8/11); React crash on deprecated projectStyle keys fixed w/ getProjectStylePrompt safety check (8/13).
-- 8/14: library "Load to Generator" fixed for remodel/texture/edit tabs; saveRender positional-args corruption bug fixed; MaskEditor component shipped on Edit/Square Up tab (draw mask → maskBase64 → rt-image-edit webhook).
-- ⚠️ STILL OPEN (needs Mitch): nightly git push 403 — local `master` (45 commits) and `origin/main` (28) share NO common ancestor; not merging autonomously. `.gitignore` ignores memory/ — daily logs need `git add -f`.
-
-### 2026-08-21
-- **All-day Render Tool session with Michael** — versions v1.1.7.2 → v1.2.4.5 (last commit `7daaf23`), all deploys finished.
-- **2K images:** patched 5 n8n image workflows with `generationConfig.imageConfig.imageSize: "2K"` (Exterior Enhancer, Remodel ×2, Texture Creator, Image Edit). Verified 2730×1536 output. No "Nano Banana 3" exists; 4K needs `gemini-3-pro-image`.
-- **Video upgrades:** all 4 Veo workflows → 1080p (requires 8s duration); added 4s/8s Clip Length selector (4s→720p, 8s→1080p auto-paired). Camera movement was never working (hardcoded prompts, broken interpolation) — rewrote Build Veo Request in both exterior video workflows. Removed unsupported 1:1/5:4 formats. Audio removal via Cloudinary `ac_none,q_auto:best` rewrite (Veo rejects `generateAudio:false`).
-- **Keyframe Assist (major feature):** new Video-tab mode — outpaint to clip ratio → derive start/end keyframes (zoom/pan/tilt = Cloudinary URL crops; dolly = new n8n workflow `RT - Keyframe Next` `4qbMLXKUNcHr1k9U` / webhook `rt-keyframe-next`; orbit = single-frame only, image models can't orbit) → Veo start+end. **Veo constraint: lastFrame requires 1080p/8s.** Now the ONLY video mode. Polish: Life & Motion chips, qualitative Move Amount, prompt previews (frontend sends `fullPrompt`, workflow uses verbatim), anti-morph + slim positive-only start-end prompt (no directional phrase, no scene description).
-- **9:16 fixes:** mobile video outpaint + edit workflow now enforce `imageConfig.aspectRatio`; Edit tab has 9:16 option. Library "Load to Video" button feeds KeyframeAssist.
-- **Gotchas learned:** n8n API-created webhook workflows need `webhookId` set manually or path never registers; read API keys from TOOLS.md at runtime (retyped keys get corrupted); video attachments don't come through the portal.
-- **Open items:** `rt-lot-placement` webhook unwired (pre-existing, flagged); interior video workflows orphaned; TOOLS.md webhook table stale (Mitch to update); pending hidden "HQ 4K" toggle idea awaiting Michael's go.
-
-### 2026-08-22 — Texture/workflow research marathon (17 rounds + sims, Michael driving)
-- **Massive R&D day on Render Tool texture application & edit workflow** — no production code shipped; findings locked into `RENDER-WORKFLOW-BUILD-SPEC.md` (read it before building the Canvas workflow UI).
-- **Test n8n workflows built (left active):** `RT - Texture Apply TEST` (`MXJ9EbgRu3P2udV6`, webhook `rt-texture-apply-test`, supports optional `maskUrl` region-guide param) and `RT - Segment Mask TEST` (`kefe537pWlMhZeNT`, webhook `rt-segment-mask-test`, Gemini binary segmentation masks). Test outputs: Cloudinary `home-designs/tests/` + Supabase `renders/tests/`.
-- **Core findings:** clean base anchor beats AI-processed base; multi-swatch single-pass degrades fidelity; hybrid one-shot (text-described materials + swatches only for exact/custom) = best single pass (8.5/10). Rule: "describe by default, swatch when exact, mask when it must be pixel-perfect." Region-guided AI edit (mask as LOCATION HINT, model regenerates full frame) 9/10 — beats manual PIL compositing (shelf fallback only).
-- **Melt characterization:** chained edits degrade at depth 3+ (sky = canary, gen 5 ≈ 5/10); intended edits persist, environment/sharpness melt. Fix = recipe stack + auto re-baseline (compose full recipe from plate after 2 edits).
-- **FINAL ARCHITECTURE v3 (locked):** raw upload → one plate pass using production exterior-tool prompt verbatim → edits chain from plate (max depth 2) → checkpoints/finals compose full recipe from styled plate → permanent depth-2 quality ceiling. 10-step Doug-journey sim validated end-to-end (FINAL v3 8/10, warm lighting survives).
-- **Real-user case (Doug Banks, profile_id=banks):** his 4-edit chain melted + inverted intent; stacked-recipe replay from clean base scored 8.5 vs his 5.5. His uploads: t8d79eoyma.png, zlcxpl0m5an.png (clean base).
-- **Hard case identified:** spatial/circulation geometry (perpendicular driveway apron) fails both text and region-guided edits — handle at compose stage or via user-drawn masks. Material swaps are solved.
-- **QC spec (Michael's catch):** completeness-only QC misses invented elements (unrequested wainscots, deleted foundation plinth). Build dual QC: recipe completeness + plate-vs-final invention diff; major inventions → re-roll, minor → user "keep or revert?". Human approval layer stays.
-- Process note: Michael called out my earlier mistake of re-posting prior results instead of running his requested new test. Media attachments via `workspace/media-out/` confirmed working in portal.
-- **Status:** research COMPLETE; next step is Canvas workflow UI build, awaiting Michael's go.
+### 2026-08-22 (condensed 2026-08-30 — findings locked in `RENDER-WORKFLOW-BUILD-SPEC.md`; full detail in git memory/2026-08-22.md)
+- 17-round texture/edit-workflow R&D marathon with Michael; no production code. Test workflows left active: `RT - Texture Apply TEST` (`MXJ9EbgRu3P2udV6`/`rt-texture-apply-test`, optional maskUrl) and `RT - Segment Mask TEST` (`kefe537pWlMhZeNT`/`rt-segment-mask-test`); outputs in Cloudinary `home-designs/tests/` + Supabase `renders/tests/`.
+- Locked rules: describe by default, swatch when exact, mask when pixel-perfect; region-guided AI edit (mask = location hint) beats PIL compositing; chained edits melt at depth 3+ → recipe stack + re-baseline. ARCHITECTURE v3: plate pass → edits max depth 2 → checkpoints/finals compose full recipe from plate.
+- Doug Banks case: stacked-recipe replay 8.5 vs his melted 4-edit chain 5.5. Hard case: spatial/circulation geometry fails text + region edits (handle at compose or user-drawn masks). Dual QC spec: recipe completeness + plate-vs-final invention diff; human approval stays.
 
 ### 2026-08-23 — Workflow research rounds 18-20 concluded + STUDIO TAB v1 SHIPPED
 - **Rounds 18-20 (v4-v6) with Michael, maca profile:** v4 (12-gen, pure text) FINAL 9/10 — locked production flow: plate → vision site-spec on RAW lot photo → stacked edits w/ checkpoints every 2-3 → final compose from plate. v5 proved auto region guides fix targeting errors (garage glass A/B: 9/10 vs unshippable). v6 settled selective masking: masks ONLY for small human-natural targets + user-drawn hardscape shapes; everything else text. Anti-drift color/time-of-day pins ~halve warming; residual chroma drift needs COLOR LOCK anchor (last open refinement). QC baselines must be the approved checkpoint, not the plate. Studies in `renders/tests/` (maca-workflow-study, v5-masked, v6, drawn-driveway-mask).
