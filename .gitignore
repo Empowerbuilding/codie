@@ -14,3 +14,5 @@ openclaw-workspace-state.json
 .openclaw/
 patch.js
 patch_page.js
+*.bak-*
+MEMORY.md.bak*

@@ -70,12 +70,14 @@ Studio checkpoint architecture (LOCKED 2026-08-25): compose = clean plate + mate
 ## SECTION C — ACTIVE CLIENTS
 
 ### Supabase Keys
-| Repo | Project Ref | Key Type | Service Role Key |
-|---|---|---|---|
-| barnhaus-design-os | `nvsczfrljlovksrdyaix` | service_role | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im52c2N6ZnJsamxvdmtzcmR5YWl4Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3ODYzODQ3MywiZXhwIjoyMDk0MjE0NDczfQ.Rl8IVENc0WSpMm3d7JQzwpPV_ILp2_b6ohn1aWX-cuc` |
-| CRM | `ejsnbluvkqocuchifdvp` | service_role | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVqc25ibHV2a3FvY3VjaGlmZHZwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NjgwMTQ5NywiZXhwIjoyMDgyMzc3NDk3fQ.ZUTMAnnrwi7KPYYhkWL4Gexbn7ClrxOkG_CGWl2Q5X8` |
-| render-tool | `weqooskgyaeryoekbhzi` | anon | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndlcW9vc2tneWFlcnlvZWtiaHppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2MzY2ODMsImV4cCI6MjA5OTIxMjY4M30.EnQZ3gRNPDH8Nvu0OHoiQY1BevPlwwcvYRT-O9vMPmQ` |
-| render-tool | `weqooskgyaeryoekbhzi` | service_role | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndlcW9vc2tneWFlcnlvZWtiaHppIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MzYzNjY4MywiZXhwIjoyMDk5MjEyNjgzfQ.xP3ZoaqYQzmp1WXRf99cioRNQ8R-mJuzxI41aBqdBB8` |
+Keys stored locally in `memory/credentials.md` (gitignored — do not put raw keys in tracked files).
+| Repo | Project Ref | Key Type |
+|---|---|---|
+| barnhaus-design-os | `nvsczfrljlovksrdyaix` | service_role |
+| CRM | `ejsnbluvkqocuchifdvp` | service_role |
+| render-tool | `weqooskgyaeryoekbhzi` | anon |
+| render-tool | `weqooskgyaeryoekbhzi` | service_role |
+
 
 ---
 
@@ -128,18 +130,13 @@ Studio checkpoint architecture (LOCKED 2026-08-25): compose = clean plate + mate
 - **Gilberto Vaz phone-only lead fix SHIPPED (CRM `18898a0`, deployed finished):** Shopify order #1120 (Bastion study set, phone-only checkout) → n8n "Shopify Order" exec errored because CRM webhook required email → contact lost. Fix in `app/api/leads/webhook/route.ts`: email optional when valid phone (≥10 digits); empty email→undefined; email dedupe skipped when absent. Replayed original webhook → contact 1b832419-… created. Note: Coolify deploy sat "queued" ~4.5 min before starting — poll longer than 5 min.
 - **Carry-over queue:** QC grader (auto-score + silent reroll) top of queue awaiting go; geometry outline guide for unmasked constructive-edit drift spec'd; pre-v1.2.8.1 projects lack step maskUrls. Gotcha reconfirmed ×2: inline token substitution gets mangled — use .py scripts reading keys from TOOLS.md.
 
-### 2026-08-27
-- Quiet day — no workspace or repo changes since midnight; 2026-08-26 activity already consolidated and committed (`2d35e96` consolidation, `63ef26f` nightly log). Git tree clean, nothing in-flight.
-- Carry-over unchanged: QC grader top of Studio queue awaiting go; geometry outline guide spec'd; test workflows rt-texture-apply-test / rt-segment-mask-test still pending cleanup.
+### 2026-08-27 → 2026-09-01 (quiet stretch, condensed 2026-09-02)
+- No code changes or deploys in any repo across these days. Memory maintenance only: consolidation commits `078a068` (8/28), `582960c` + Section D trim w/ backup `MEMORY.md.bak-20260828` (8/29), `3b06018` + reorg `d60ce9b` (8/30), `40b40c7` (8/31).
+- 2026-09-01: no daily log written; no repo activity. barnhaus-design-os Supabase service_role key rotated to `sb_secret_…` format in Section C (uncommitted at time of consolidation — committed 9/02).
+- Carry-over unchanged: QC grader top of Studio queue; geometry outline guide spec'd; test workflows rt-texture-apply-test / rt-segment-mask-test pending cleanup; nightly push to `Empowerbuilding/codie` still blocked (403, diverged histories) awaiting Mitch.
 
-### 2026-08-28
-- Quiet day — only change was MEMORY.md consolidation commit `078a068` (2026-08-27 rollup). Git tree clean, no repo work or deploys in-flight.
-- Carry-over unchanged: QC grader top of Studio queue; geometry outline guide spec'd; test workflows pending cleanup.
-
-### 2026-08-29
-- Quiet day — MEMORY.md Section D trimmed (July stale notes removed, backup `MEMORY.md.bak-20260828`); consolidation commit `582960c` already landed. No commits in barnhaus-design-os, CRM, or render-tool since 2026-08-28; no deploys in-flight.
-- Carry-over unchanged: QC grader top of Studio queue; geometry outline guide spec'd; test workflows rt-texture-apply-test / rt-segment-mask-test pending cleanup.
-
-### 2026-08-30
-- Quiet day — no code changes or deploys. Memory maintenance only: MEMORY.md consolidated (`3b06018`) then trimmed/reorganized -35/+15 lines (`d60ce9b`). Working tree clean at end of day.
-- Carry-over unchanged: QC grader top of Studio queue; geometry outline guide spec'd; test workflows rt-texture-apply-test / rt-segment-mask-test pending cleanup.
+### 2026-09-02 — Orbit keyframes: AI end frames shipped + prompt tuned (v1.2.10.1–.2)
+- **Orbit now generates AI end frame (v1.2.10.1 `0372b6b`, deployed):** Michael wanted first+last frame approval for ALL camera motions; orbit was the only single-frame (Veo-driven) mode. `KeyframeAssist.jsx`: orbit-left/right type 'veo'→'ai', orbit instructions in buildKeyframePrompt, all 'veo'-type branches/UI removed; buildVideoPrompt uses "curved orbital arc" when orbit+endFrame. n8n: `RT - Exterior Video` (BR34NolETCR4i0RG) start-end prompt now conditional (orbit → curved arc, subject centered); Mobile (GzFmqQvviTmwIUBS) was MISSING the start-end rewrite entirely — brought in line incl. orbit. `rt-keyframe-next` unchanged (uses fullPrompt verbatim).
+- **Orbit prompt tuning (v1.2.10.2, deployed):** initial prompt cloned start frame ~2/3 rolls. Iterated v2→v4 live against rt-keyframe-next: winning formula = name TARGET COMPOSITION ("three-quarter view, corner nearest camera") + VIEWER-relative direction ("camera moves toward the RIGHT EDGE of the current frame"). Orbit degrees now 15/35/50/70 (subtle/medium/big/huge). Still stochastic — regenerate 1-3x is expected UX; QC-grader auto-reroll is the real fix.
+- **LESSON (generalizes to Studio):** image-model camera/direction instructions must be FRAME/VIEWER-relative and name the target composition, not describe the motion.
+- **Key rotation fallout:** render-tool anon+service keys returned 401 on REST (legacy JWT keys likely rotated/disabled) — used n8n exec logs instead; verify keys next session. barnhaus-design-os local `lib/supabase.ts` anon key swapped to new `sb_publishable_…` format (backup `.bak-rot20260901`); verify service-role key + credential entries.
