@@ -140,3 +140,7 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - **Orbit prompt tuning (v1.2.10.2, deployed):** initial prompt cloned start frame ~2/3 rolls. Iterated v2→v4 live against rt-keyframe-next: winning formula = name TARGET COMPOSITION ("three-quarter view, corner nearest camera") + VIEWER-relative direction ("camera moves toward the RIGHT EDGE of the current frame"). Orbit degrees now 15/35/50/70 (subtle/medium/big/huge). Still stochastic — regenerate 1-3x is expected UX; QC-grader auto-reroll is the real fix.
 - **LESSON (generalizes to Studio):** image-model camera/direction instructions must be FRAME/VIEWER-relative and name the target composition, not describe the motion.
 - **Key rotation fallout:** render-tool anon+service keys returned 401 on REST (legacy JWT keys likely rotated/disabled) — used n8n exec logs instead; verify keys next session. barnhaus-design-os local `lib/supabase.ts` anon key swapped to new `sb_publishable_…` format (backup `.bak-rot20260901`); verify service-role key + credential entries.
+
+### 2026-09-03 — Quiet day
+- No new activity; git tree clean, all Sept 2 work committed (`1ff30c5`, `fcb9345`). Backfilled 09-02 log: Supabase anon key rotation in `barnhaus-design-os/lib/supabase.ts` (legacy JWT → `sb_publishable_...`).
+- Open item carried: verify render-tool + MEMORY.md Supabase keys still valid after rotation.
