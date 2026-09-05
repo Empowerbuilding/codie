@@ -144,3 +144,9 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 ### 2026-09-03 — Quiet day
 - No new activity; git tree clean, all Sept 2 work committed (`1ff30c5`, `fcb9345`). Backfilled 09-02 log: Supabase anon key rotation in `barnhaus-design-os/lib/supabase.ts` (legacy JWT → `sb_publishable_...`).
 - Open item carried: verify render-tool + MEMORY.md Supabase keys still valid after rotation.
+
+### 2026-09-04 — Quiet day (nightly check only)
+- Sept 3 activity was memory consolidation commit `05e9877`: trimmed MEMORY.md, deleted `MEMORY.md.bak-20260828`, backfilled 09-02 log, added `.gitignore` entries (`memory/`, `MEMORY.md.bak*`).
+- ⚠️ `memory/` is now gitignored — daily logs + `memory/credentials.md` stay local only (previously tracked daily files remain in git history).
+- No commits in CRM, barnhaus-design-os, or render-tool on Sept 3; git tree clean.
+- Carry-over: verify render-tool/MEMORY.md Supabase keys still valid after rotation.
