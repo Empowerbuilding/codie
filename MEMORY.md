@@ -145,3 +145,7 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - No commits in CRM, barnhaus-design-os, or render-tool across these days; only memory-consolidation commits (`05e9877` 9/03, `4f8f499` 9/05, `42f4bc2` 9/06, `f478251` 9/07). Git tree clean throughout.
 - 9/03 consolidation: trimmed MEMORY.md, deleted `MEMORY.md.bak-20260828`, backfilled 09-02 log, added `.gitignore` entries (`memory/`, `MEMORY.md.bak*`). ⚠️ `memory/` is now gitignored — daily logs + `memory/credentials.md` stay local only (previously tracked daily files remain in git history).
 - Carry-over still open: verify render-tool + MEMORY.md Supabase keys after anon key rotation (Sept 2).
+
+### 2026-09-08 (quiet day)
+- No commits in CRM, barnhaus-design-os, or render-tool. Workspace git tree clean. Only activity: memory consolidation `57d72f1` (condensed 09-03→09-07 into one quiet-stretch entry).
+- Carry-over unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; test workflows rt-texture-apply-test / rt-segment-mask-test pending cleanup; nightly push to `Empowerbuilding/codie` blocked awaiting Mitch.
