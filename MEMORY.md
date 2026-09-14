@@ -146,18 +146,6 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - 9/03 consolidation: trimmed MEMORY.md, deleted `MEMORY.md.bak-20260828`, backfilled 09-02 log, added `.gitignore` entries (`memory/`, `MEMORY.md.bak*`). ⚠️ `memory/` is now gitignored — daily logs + `memory/credentials.md` stay local only (previously tracked daily files remain in git history).
 - Carry-over still open: verify render-tool + MEMORY.md Supabase keys after anon key rotation (Sept 2).
 
-### 2026-09-08 (quiet day)
-- No commits in CRM, barnhaus-design-os, or render-tool. Workspace git tree clean. Only activity: memory consolidation `57d72f1` (condensed 09-03→09-07 into one quiet-stretch entry).
-- Carry-over unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; test workflows rt-texture-apply-test / rt-segment-mask-test pending cleanup; nightly push to `Empowerbuilding/codie` blocked awaiting Mitch.
-
-### 2026-09-09 (quiet day)
-- No commits in CRM, barnhaus-design-os, or render-tool. Workspace git tree clean. Only activity: memory consolidation `d42281e` (added 09-08 quiet-day entry).
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; test workflows rt-texture-apply-test / rt-segment-mask-test pending cleanup; nightly push to `Empowerbuilding/codie` blocked awaiting Mitch.
-
-### 2026-09-10 (quiet day)
-- No commits in CRM, barnhaus-design-os, or render-tool. Workspace git tree clean. Only activity: memory consolidation `4dd08d7` (added 09-09 quiet-day entry).
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; test workflows rt-texture-apply-test / rt-segment-mask-test pending cleanup; nightly push to `Empowerbuilding/codie` blocked awaiting Mitch.
-
-### 2026-09-11 (quiet day)
-- No commits in CRM, barnhaus-design-os, or render-tool. Workspace git tree clean. Only activity: memory consolidation `eb0ac52` (added 09-10 quiet-day entry).
+### 2026-09-08 → 2026-09-13 (quiet stretch, condensed 2026-09-14)
+- No commits in CRM, barnhaus-design-os, or render-tool across these days; workspace git tree clean throughout. Only activity: daily memory-consolidation commits (`57d72f1` 9/08, `d42281e` 9/09, `4dd08d7` 9/10, `eb0ac52` 9/11, `d1d396a` 9/12; 9/13 consolidation did not run — covered here).
 - Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; test workflows rt-texture-apply-test / rt-segment-mask-test pending cleanup; nightly push to `Empowerbuilding/codie` blocked awaiting Mitch.
