@@ -153,3 +153,8 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 ### 2026-09-14 (consolidated 2026-09-15)
 - Quiet day: no commits in CRM, barnhaus-design-os, or render-tool; workspace git tree clean. Only activity: memory consolidation `9184593` condensing the 09-08 → 09-13 quiet-stretch entries.
 - Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; nightly push to `Empowerbuilding/codie` blocked awaiting Mitch.
+
+### 2026-09-15 → 2026-09-16 (consolidated 2026-09-17; 09-15 missed by prior run)
+- **09-15 — Library → Studio handoff SHIPPED (v1.2.11.1 `04578f5`, deploy finished):** Michael asked for "Load to Studio" on expanded library card + removal of "Submit for Review". Library.jsx: ✦ gold Load to Studio btn (image renders only) → navigate w/ intent:'studio'; RENDER_SUBMIT postMessage removed from Library modal (still in Home.jsx result sections). Home.jsx: studioIncoming state routes to Studio tab w/ {render, ts}. Studio.jsx: ts-deduped handoff effect (consumedIncomingRef); auto-saves current project by reading localStorage directly — **gotcha: mount-time closure state is stale, read localStorage at handoff time**. studio-project rows restore full project; other renders load enhanced/original as fresh plate.
+- **09-16:** quiet day — no requests, no code changes, no deploys, nothing in-flight.
+- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; nightly push to `Empowerbuilding/codie` blocked awaiting Mitch.
