@@ -163,3 +163,8 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - Quiet day: no teammate requests, no code changes, no deploys in CRM, barnhaus-design-os, or render-tool. Only activity: memory consolidation `4255efb`.
 - Nothing in-flight; latest shipped work remains Library → Studio handoff v1.2.11.1 (09-15).
 - Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; nightly push to `Empowerbuilding/codie` blocked awaiting Mitch.
+
+### 2026-09-18 → 2026-09-20 (consolidated 2026-09-21)
+- Quiet stretch: no repo work, no deploys, no teammate requests across all three days. Only activity: memory consolidation commits (`0f9e527` 9/18; 9/19–9/20 nightly logs only).
+- MEMORY.md remains ~24k chars (>20k cap) but no Section D entries exceed the 60-day window yet (oldest rollup extends to 2026-08-20; natural trimming starts ~mid-October, or Mitch can authorize condensing sooner).
+- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; nightly push to `Empowerbuilding/codie` blocked awaiting Mitch.
