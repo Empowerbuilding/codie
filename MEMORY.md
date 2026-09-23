@@ -174,3 +174,9 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - ⚠️ Flag for Mitch: `memory/credentials.md` and `MEMORY.md.bak-20260828` both show mtime 2026-09-21 01:17:35 UTC (same instant) with no visible session activity or chat context explaining it. Both gitignored — nothing leaked to git; credentials.md content still looks like the expected Supabase key table, but worth verifying.
 - MEMORY.md still ~24k chars (>20k cap); no Section D entries past the 60-day window yet — natural trimming starts ~mid-October unless Mitch authorizes condensing sooner.
 - Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; nightly push to `Empowerbuilding/codie` blocked awaiting Mitch.
+
+### 2026-09-22 (consolidated 2026-09-23)
+- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool. Only activity: memory consolidation commit `5abd868` (added the 09-21 entry incl. the credentials.md/MEMORY.md.bak mtime anomaly flag for Mitch).
+- No memory/2026-09-22.md nightly file was written (gap covered by the 09-23 nightly log + `5abd868`).
+- MEMORY.md over 20k cap but no Section D entries older than 60 days yet — natural trimming starts ~mid-October.
+- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; nightly push to `Empowerbuilding/codie` blocked awaiting Mitch.
