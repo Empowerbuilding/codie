@@ -86,7 +86,7 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 ### July → 2026-08-20 rollup (condensed 2026-08-30 — full detail in git memory/*.md)
 - Render Tool feature run-up: Edit/Square Up tab, Texture Creator (v1.1.5.1), 8/8 frontend overhaul + nginx.conf, view-angle presets + prompt bubbles, "Video (Animate)" tab, MaskEditor on Edit tab (maskBase64 → rt-image-edit), library Load-to-Generator + saveRender positional-args fixes, getProjectStylePrompt crash guard.
 - Standing fixes: Supabase RLS disabled on render table (anon inserts freely); workspace repos must stay node:node-owned — re-chown after any Mitch-side sync; `.gitignore` ignores memory/ — daily logs need `git add -f`.
-- ⚠️ STILL OPEN (needs Mitch): nightly push to `Empowerbuilding/codie` 403 — local `master` and `origin/main` share NO common ancestor; not merging autonomously.
+- ~~⚠️ STILL OPEN (needs Mitch): nightly push to `Empowerbuilding/codie` 403 — local `master` and `origin/main` share NO common ancestor; not merging autonomously.~~ → ✅ RESOLVED 2026-10-01: push working again; remote master = local = `b94f651`.
 
 ### 2026-08-21 (condensed 2026-08-30 — full detail in git memory/2026-08-21.md)
 - All-day Render Tool session w/ Michael: v1.1.7.2 → v1.2.4.5 (`7daaf23`). 2K images across 5 image workflows (`imageConfig.imageSize: "2K"`; 4K would need `gemini-3-pro-image`). All 4 Veo workflows → 1080p/8s + 4s→720p clip selector; camera-movement prompt build rewritten; audio removal via Cloudinary `ac_none,q_auto:best` (Veo rejects `generateAudio:false`).
@@ -217,3 +217,9 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 ### 2026-10-01 (consolidated 2026-10-02)
 - Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (last repo commits: render-tool 09-15, CRM 08-26, barnhaus 07-02). Only activity on 09-30: MEMORY.md consolidation commit `85a0c45` + nightly log; working tree clean. Nothing in-flight.
 - Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; nightly push to `Empowerbuilding/codie` blocked awaiting Mitch; MEMORY.md >20k cap — Section D 60-day trimming starts ~mid-October (oldest rollup extends to 2026-08-20).
+
+### 2026-10-02 (consolidated 2026-10-03)
+- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (last repo commits: render-tool 09-15, CRM 08-26, barnhaus 07-02). Only activity on 10-01: MEMORY.md consolidation commit `b94f651` + nightly log; working tree clean. Nothing in-flight.
+- ✅ **Nightly push to `Empowerbuilding/codie` RESOLVED** (was 403 / diverged histories, awaiting Mitch since July): remote master = local = `b94f651` — the Oct 1 consolidation commit reached GitHub. Carry-over closed; marked resolved in the July→Aug-20 rollup above.
+- MEMORY.md ~30.5k chars (>20k cap); still no Section D entries past the 60-day window (oldest rollup ends 2026-08-20) — natural trimming starts ~Oct 19 when that rollup ages out.
+- Carry-overs (push item dropped): verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending.
