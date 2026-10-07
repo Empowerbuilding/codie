@@ -235,3 +235,7 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 ### 2026-10-05 (consolidated 2026-10-06)
 - Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (last repo commits: render-tool 09-15, CRM 08-26, barnhaus 07-02). Only activity Oct 4: 13:03 UTC consolidation commit `7cd4620` (added "### 2026-10-03" section) + nightly log; working tree clean at log time. Nothing in-flight.
 - Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md ~34k chars (>20k cap) — Section D 60-day trimming starts ~Oct 19 when the July→Aug-20 rollup ages out.
+
+### 2026-10-06 (consolidated 2026-10-07)
+- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (last repo commits: render-tool 09-15, CRM 08-26, barnhaus 07-02). Only activity Oct 5: consolidation commit + nightly log; working tree clean at log time. Nothing in-flight.
+- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md >20k cap — Section D 60-day trimming starts ~Oct 19 when the July→Aug-20 rollup ages out.
