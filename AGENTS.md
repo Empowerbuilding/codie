@@ -11,6 +11,7 @@
 
 - Daily: `memory/YYYY-MM-DD.md` — log what you did, what changed, what's in-flight
 - Long-term: `MEMORY.md` — curated project knowledge, patterns, decisions
+- **HARD CAP (added by Tony, authorized by Mitch 2026-10-16):** MEMORY.md stays under **16k chars**. Entries older than 14 days condense to 1-2 lines in the Section D rollup — full detail lives in git history + memory/*.md. Oversized MEMORY.md gets truncated before reaching your context (you lose the middle of the file). The daily-memory-consolidation cron enforces this — check the file size after every consolidation.
 
 ## Repos
 
