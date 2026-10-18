@@ -83,7 +83,7 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 
 ## SECTION D — RECENT SESSION NOTES (Trimmable — HARD CAP 16k, condense entries older than 14 days to 1-2 lines; full detail in git history + memory/*.md)
 
-## Rollup: July → 2026-10-01 (condensed 2026-10-16 — full detail in git history + git memory/*.md)
+## Rollup: July → 2026-10-03 (condensed 2026-10-16, extended 2026-10-18 — full detail in git history + memory/*.md)
 - **July → 08-20**: Render Tool feature run-up — Edit/Square Up tab, Texture Creator, 8/8 frontend overhaul + nginx, view-angle presets, video tab
 - **08-21**: All-day Render Tool session w/ Michael — v1.1.7.2 → v1.2.4.5, 2K images across 5 image workflows
 - **08-22**: 17-round texture/edit-workflow R&D marathon; findings locked in RENDER-WORKFLOW-BUILD-SPEC.md
@@ -96,16 +96,7 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - **09-03 → 09-13**: quiet — no repo commits
 - **09-15 → 09-16**: Library → Studio handoff SHIPPED (v1.2.11.1)
 - **09-17 → 10-01**: quiet — no repo work, deploys, or portal tasks (consolidation commits only)
-
-### 2026-10-02 (consolidated 2026-10-03)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (last repo commits: render-tool 09-15, CRM 08-26, barnhaus 07-02). Only activity on 10-01: MEMORY.md consolidation commit `b94f651` + nightly log; working tree clean. Nothing in-flight.
-- ✅ **Nightly push to `Empowerbuilding/codie` RESOLVED** (was 403 / diverged histories, awaiting Mitch since July): remote master = local = `b94f651` — the Oct 1 consolidation commit reached GitHub. Carry-over closed; marked resolved in the July→Aug-20 rollup above.
-- MEMORY.md ~30.5k chars (>20k cap); still no Section D entries past the 60-day window (oldest rollup ends 2026-08-20) — natural trimming starts ~Oct 19 when that rollup ages out.
-- Carry-overs (push item dropped): verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending.
-
-### 2026-10-03 (consolidated 2026-10-04)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (last repo commits: render-tool 09-15, CRM 08-26, barnhaus 07-02). Only activity on 10-02: MEMORY.md consolidation commit `853aa01` + nightly log; working tree clean. Nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md ~32k chars (>20k cap) — Section D 60-day trimming starts ~Oct 19 when the July→Aug-20 rollup ages out.
+- **10-02 → 10-03**: quiet — no repo/portal activity; ✅ nightly push to `Empowerbuilding/codie` RESOLVED 10-02 (July 403 / diverged-histories carry-over closed — remote master = local = `b94f651`)
 
 ### 2026-10-04 (consolidated 2026-10-05)
 - Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (last repo commits: render-tool 09-15, CRM 08-26, barnhaus 07-02). Only activity Oct 3: 13:04 UTC consolidation commit `2f1fd4b` (added "### 2026-10-02" section; marked nightly-push carry-over resolved in July→Aug-20 rollup); the Oct-4 13:00 UTC consolidation `7cd4620` followed after the nightly log. Working tree clean; nothing in-flight.
@@ -158,3 +149,8 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 ### 2026-10-16 (consolidated 2026-10-17)
 - Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (repo heads unchanged: render-tool `04578f5` 09-15, CRM `18898a0` 08-26, barnhaus `804cf73` 07-02). No workspace file changes since the 10-15 13:00 consolidation commit; working tree clean at nightly log time (memory/ is gitignored — nightly logs local-only). Nothing in-flight.
 - Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md ~41.1k chars (>20k cap) — 60-day cutoff today is Aug 18; July→Aug-20 rollup still holds Aug 19–20 content — Section D trim window opens ~Oct 19.
+
+### 2026-10-17 (consolidated 2026-10-18)
+- Quiet day: no repo work, no deploys, no portal tasks (repo heads unchanged: render-tool `04578f5` 09-15, CRM `18898a0` 08-26, barnhaus `804cf73` 07-02). Working tree clean at nightly log time; nothing in-flight.
+- 10-16 bootstrap recap: MEMORY.md consolidated 41.8k → 15.6k (commits `4f25529`, `93680a0`; backup `MEMORY.md.bak-20261016`, gitignored) + AGENTS.md 16k hard-cap rule added (`e75cbe3`, Tony applied / Mitch authorized) — check MEMORY.md size after every consolidation.
+- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending.
