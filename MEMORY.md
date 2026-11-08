@@ -106,6 +106,9 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - **10-02 → 10-03**: quiet — no repo/portal activity; ✅ nightly push to `Empowerbuilding/codie` RESOLVED 10-02 (July 403 / diverged-histories carry-over closed — remote master = local = `b94f651`)
 - **10-04 → 10-17**: quiet — no repo work, deploys, or portal tasks; memory housekeeping only. 10-16: MEMORY.md consolidated 41.8k → 15.6k + AGENTS.md 16k hard-cap rule added (Tony applied / Mitch authorized).
 
+### 2026-11-07
+- Quiet — no repo commits, deploys, or portal tasks; MEMORY.md 15.7k (under cap), workspace clean, `memory/` still gitignored. Carry-overs: TOOLS.md n8n key dead (needs Mitch refresh); verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test n8n cleanup pending.
+
 ### 2026-11-08 (Omni video migration + full E2E — detail in memory/2026-11-08.md)
 - Veo 3.1 preview sunset 10-22 killed all 4 RT video workflows → overnight migration to Omni (Interactions API, `gemini-omni-1.1-flash`); Tony verified version pointers in DB. v1.2.11.3 shipped (safe webhook parsing, commit `09900e6`). My migration script wrote FLAT connections → instant 500s; fixed via `scripts/repair_connections.py`. Backups in `backups/n8n-video-migration-20261108/` (both gitignored).
 - E2E VERIFIED post-fix (real generations, ac_none mp4s, 40-75s each): exterior wide (exec 165397 + 165411), exterior mobile (165390), interior wide + interior mobile (fresh payload replays ~04:40 UTC), start-end keyframe mode (165411 — inputMode start-end, end frame from rt-keyframe-next). Five 04:04-04:05 error execs = empty-payload pings (Fetch Render URL undefined), not defects.
