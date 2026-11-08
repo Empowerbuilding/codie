@@ -62,8 +62,15 @@ What it is: Empower Building CRM — Facebook lead tracking, client contacts, Me
 ⚠️ This is the NEW version. NEVER touch `imageenhancer` repo or pic.barnhaussteelbuilders.com.
 n8n webhooks are shared with the original — same endpoints.
 Supabase `renders` table: id, created_at, render_type, original_image_url, enhanced_image_url, prompt, options (jsonb), metadata (jsonb).
-Current Version: v1.2.9.1 (Studio pure-recipe-replay checkpoints — see memory/2026-08-25.md)
+Current Version: v1.2.11.3 (safe webhook JSON parsing; video on Omni pipeline — see memory/2026-11-08.md)
 Studio checkpoint architecture (LOCKED 2026-08-25): compose = clean plate + material refs + recipe text + composited step masks + TEXT layout spec from `rt-studio-layout-spec` vision workflow (`KM1Tj25Nq2PbGyrc`). NEVER pass the approved working image into a compose — that was the melt cause. Next build: QC grader (auto-score texture-vs-plate + layout-vs-spec, silent rerolls).
+**Video pipeline (migrated 2026-11-08):** Google sunset Veo 3.1 preview 10-22 → all 4 RT video workflows rebuilt on Omni: webhook → Fetch Render → Gemini vision → Build Omni Request → `v1beta/interactions` (`gemini-omni-1.1-flash`, 600s timeout) → video b64 → Cloudinary `ac_none,q_auto:best`. Response shape `{"success":true,"video":...}` preserved (frontend `.video || .url`). All 4 + start-end keyframe E2E-verified 11-08 (~40-75s per video). rt-interior-video(-mobile) are API-only now — frontend interior-video code was removed as dead (commit `22ddc25`); TOOLS.md interior-video rows stale. Dec 3 2026: Omni 1.1 auto-routes to 1.2 — never hardcode.
+
+### n8n API Ops Rules (baked in 2026-11-08 per Tony — 2nd occurrence of this bug class)
+- **After ANY public-API PUT to an n8n workflow:** GET the workflow and verify the versionId CHANGED vs before the PUT, confirm the pointer resolves to a real workflow_history row (public API `/workflows/{id}/history/{versionId}` 404s on this instance → DB check via Tony), then smoke-test the webhook. A PUT that saves nodes but leaves the version pointer stale desyncs BOTH the UI editor and the runtime ("could not find workflow"). Bit us 10/30 (tony-send-email) and 11/07 (video migration).
+- **PUT connections MUST be nested:** `"main": [[{...}]]`. Flat `[{...}]` saves fine but breaks instantiation ("object is not iterable" → instant 500s, no execution record).
+- **Working n8n key:** `n8n_api_key.txt` line 2 (workspace root, gitignored) or `/tmp/.n8n_key`. TOOLS.md key dead since 11-07 (same user, new iat). Never put raw keys in tracked files.
+- **Video webhook diagnostics:** missing `renderUrl` → instant "URL parameter must be a string, got undefined" at Fetch Render — check the payload before blaming the workflow.
 
 ---
 
@@ -83,7 +90,7 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 
 ## SECTION D — RECENT SESSION NOTES (Trimmable — HARD CAP 16k, condense entries older than 14 days to 1-2 lines; full detail in git history + memory/*.md)
 
-## Rollup: July → 2026-10-03 (condensed 2026-10-16, extended 2026-10-18 — full detail in git history + memory/*.md)
+## Rollup: July → 2026-10-17 (condensed 2026-11-08 — full detail in git history + memory/*.md)
 - **July → 08-20**: Render Tool feature run-up — Edit/Square Up tab, Texture Creator, 8/8 frontend overhaul + nginx, view-angle presets, video tab
 - **08-21**: All-day Render Tool session w/ Michael — v1.1.7.2 → v1.2.4.5, 2K images across 5 image workflows
 - **08-22**: 17-round texture/edit-workflow R&D marathon; findings locked in RENDER-WORKFLOW-BUILD-SPEC.md
@@ -97,60 +104,11 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - **09-15 → 09-16**: Library → Studio handoff SHIPPED (v1.2.11.1)
 - **09-17 → 10-01**: quiet — no repo work, deploys, or portal tasks (consolidation commits only)
 - **10-02 → 10-03**: quiet — no repo/portal activity; ✅ nightly push to `Empowerbuilding/codie` RESOLVED 10-02 (July 403 / diverged-histories carry-over closed — remote master = local = `b94f651`)
+- **10-04 → 10-17**: quiet — no repo work, deploys, or portal tasks; memory housekeeping only. 10-16: MEMORY.md consolidated 41.8k → 15.6k + AGENTS.md 16k hard-cap rule added (Tony applied / Mitch authorized).
 
-### 2026-10-04 (consolidated 2026-10-05)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (last repo commits: render-tool 09-15, CRM 08-26, barnhaus 07-02). Only activity Oct 3: 13:04 UTC consolidation commit `2f1fd4b` (added "### 2026-10-02" section; marked nightly-push carry-over resolved in July→Aug-20 rollup); the Oct-4 13:00 UTC consolidation `7cd4620` followed after the nightly log. Working tree clean; nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md ~33.5k chars (>20k cap) — Section D 60-day trimming starts ~Oct 19 when the July→Aug-20 rollup ages out.
-
-### 2026-10-05 (consolidated 2026-10-06)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (last repo commits: render-tool 09-15, CRM 08-26, barnhaus 07-02). Only activity Oct 4: 13:03 UTC consolidation commit `7cd4620` (added "### 2026-10-03" section) + nightly log; working tree clean at log time. Nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md ~34k chars (>20k cap) — Section D 60-day trimming starts ~Oct 19 when the July→Aug-20 rollup ages out.
-
-### 2026-10-06 (consolidated 2026-10-07)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (last repo commits: render-tool 09-15, CRM 08-26, barnhaus 07-02). Only activity Oct 5: consolidation commit + nightly log; working tree clean at log time. Nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md >20k cap — Section D 60-day trimming starts ~Oct 19 when the July→Aug-20 rollup ages out.
-
-### 2026-10-07 (consolidated 2026-10-08)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (last repo commits: render-tool 09-15, CRM 08-26, barnhaus 07-02). Working tree clean at log time; nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md >20k cap — no Section D entries older than 60 days yet (oldest rollup extends to 2026-08-20); natural trimming starts ~Oct 19.
-
-### 2026-10-08 (consolidated 2026-10-09)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (repo heads unchanged: render-tool `04578f5` 09-15, CRM `18898a0` 08-26, barnhaus `804cf73` 07-02). Only activity: memory housekeeping — Oct 7 consolidation `9f6d325` (per nightly log) + Oct 8 consolidation `c84b3c9`. Nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md >20k cap — Section D 60-day trimming starts ~Oct 19 when the July→Aug-20 rollup ages out.
-
-### 2026-10-09 (consolidated 2026-10-10)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (repo heads unchanged: render-tool `04578f5` 09-15, CRM `18898a0` 08-26, barnhaus `804cf73` 07-02). Only activity: memory housekeeping — Oct 8 consolidation `c84b3c9` (2026-10-07 section) + memory/2026-10-08.md nightly log. Nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md >20k cap — Section D 60-day trimming starts ~Oct 19 when the July→Aug-20 rollup ages out.
-
-### 2026-10-10 (consolidated 2026-10-11)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (repo heads unchanged: render-tool `04578f5` 09-15, CRM `18898a0` 08-26, barnhaus `804cf73` 07-02). Only activity: memory housekeeping — Oct 9 consolidation `484e20a` (added 2026-10-08 section) + memory/2026-10-09.md nightly log. Nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md ~36.8k chars (>20k cap) — Section D 60-day trimming starts ~Oct 19 when the July→Aug-20 rollup ages out.
-
-### 2026-10-11 (consolidated 2026-10-12)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (repo heads unchanged: render-tool `04578f5` 09-15, CRM `18898a0` 08-26, barnhaus `804cf73` 07-02). Only activity: memory housekeeping — Oct 10 consolidation `a037062` (added 2026-10-09 section) + memory/2026-10-10.md nightly log. Nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md ~37.5k chars (>20k cap) — no Section D entries older than 60 days yet; trimming starts ~Oct 19 when the July→Aug-20 rollup ages out.
-
-### 2026-10-12 (consolidated 2026-10-13)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (repo heads unchanged: render-tool `04578f5` 09-15, CRM `18898a0` 08-26, barnhaus `804cf73` 07-02). No files modified in prior 24h; working tree clean at nightly log time. Nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md ~37.5k chars (>20k cap) — Section D 60-day trim window opens ~Oct 19 when the July→Aug-20 rollup fully ages out (60-day cutoff today is Aug 14; rollup still holds Aug 14–20 content).
-
-### 2026-10-13 (consolidated 2026-10-14)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (repo heads unchanged: render-tool `04578f5` 09-15, CRM `18898a0` 08-26, barnhaus `804cf73` 07-02). No files modified in prior 24h; working tree clean at nightly log time. Nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md ~38.9k chars (>20k cap) — Section D 60-day trim window opens ~Oct 19 when the July→Aug-20 rollup fully ages out (60-day cutoff today is Aug 15; rollup still holds Aug 15–20 content).
-
-### 2026-10-14 (consolidated 2026-10-15)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (repo heads unchanged: render-tool `04578f5` 09-15, CRM `18898a0` 08-26, barnhaus `804cf73` 07-02). No files modified in prior 24h; working tree clean at nightly log time. Nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md ~39.7k chars (>20k cap) — no Section D entries older than 60 days yet (60-day cutoff today is Aug 16; July→Aug-20 rollup still holds Aug 16–20 content) — trim window opens ~Oct 19.
-
-### 2026-10-15 (consolidated 2026-10-16)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (repo heads unchanged: render-tool `04578f5` 09-15, CRM `18898a0` 08-26, barnhaus `804cf73` 07-02). Only activity: 13:00 UTC consolidation commit (added 2026-10-13 section) + memory/2026-10-15.md nightly log. Working tree clean at log time; nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md ~40.4k chars (>20k cap) — 60-day cutoff today is Aug 17; July→Aug-20 rollup still holds Aug 17–20 content — Section D trim window opens ~Oct 19.
-
-### 2026-10-16 (consolidated 2026-10-17)
-- Quiet day: no repo work, no deploys, no portal tasks in CRM, barnhaus-design-os, or render-tool (repo heads unchanged: render-tool `04578f5` 09-15, CRM `18898a0` 08-26, barnhaus `804cf73` 07-02). No workspace file changes since the 10-15 13:00 consolidation commit; working tree clean at nightly log time (memory/ is gitignored — nightly logs local-only). Nothing in-flight.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending; MEMORY.md ~41.1k chars (>20k cap) — 60-day cutoff today is Aug 18; July→Aug-20 rollup still holds Aug 19–20 content — Section D trim window opens ~Oct 19.
-
-### 2026-10-17 (consolidated 2026-10-18)
-- Quiet day: no repo work, no deploys, no portal tasks (repo heads unchanged: render-tool `04578f5` 09-15, CRM `18898a0` 08-26, barnhaus `804cf73` 07-02). Working tree clean at nightly log time; nothing in-flight.
-- 10-16 bootstrap recap: MEMORY.md consolidated 41.8k → 15.6k (commits `4f25529`, `93680a0`; backup `MEMORY.md.bak-20261016`, gitignored) + AGENTS.md 16k hard-cap rule added (`e75cbe3`, Tony applied / Mitch authorized) — check MEMORY.md size after every consolidation.
-- Carry-overs unchanged: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test cleanup pending.
+### 2026-11-08 (Omni video migration + full E2E — detail in memory/2026-11-08.md)
+- Veo 3.1 preview sunset 10-22 killed all 4 RT video workflows → overnight migration to Omni (Interactions API, `gemini-omni-1.1-flash`); Tony verified version pointers in DB. v1.2.11.3 shipped (safe webhook parsing, commit `09900e6`). My migration script wrote FLAT connections → instant 500s; fixed via `scripts/repair_connections.py`. Backups in `backups/n8n-video-migration-20261108/` (both gitignored).
+- E2E VERIFIED post-fix (real generations, ac_none mp4s, 40-75s each): exterior wide (exec 165397 + 165411), exterior mobile (165390), interior wide + interior mobile (fresh payload replays ~04:40 UTC), start-end keyframe mode (165411 — inputMode start-end, end frame from rt-keyframe-next). Five 04:04-04:05 error execs = empty-payload pings (Fetch Render URL undefined), not defects.
+- RT - Analyze Style (`YuEbOkC67vVfCDTy`, rt-analyze-style, Remodel tab Analyze buttons) found INACTIVE since 09-02 01:46 with no documented reason → reactivated + smoke-tested (200 in 10s, proper description JSON).
+- Open: Coolify API key dead ~03:55 11-08 — refresh before next deploy. Legacy non-RT video workflows (Exterior/Interior Video Workflow, orchestrators, prompt enhancers) still active on dead Veo — Mitch to deactivate. memory_search index broken — needs `openclaw memory index --force` on host. TOOLS.md stale (dead n8n key, veo refs, interior-video rows) — Mitch/Tony only.
+- Carry-overs: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test n8n cleanup pending.

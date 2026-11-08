@@ -16,3 +16,6 @@ patch.js
 patch_page.js
 *.bak-*
 MEMORY.md.bak*
+n8n_api_key.txt
+scripts/
+backups/
