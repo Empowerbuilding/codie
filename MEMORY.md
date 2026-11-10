@@ -117,3 +117,6 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - ~14:45 portal (Michael): version badge overlapped camera/upload button on mobile Safari Enhance tab → fixed via `.version-tag` class + App.css media query (max-width 640px → display:none). **v1.2.11.4** (commit `411ea62`, deploy `a11sa77pv58g2p16znnt9nc4` finished). Coolify API key working again — the ~03:55 "dead key" note was transient. NOTE: Section B "Current Version" line still reads v1.2.11.3; repo is at v1.2.11.4 — next session should bump it.
 - Michael confirmed target video deliverable format after live re-test: **9:16 mobile @ 8 seconds** — keep as default when building video features (Canvas UI, QC defaults).
 - Carry-overs: verify render-tool + MEMORY.md Supabase keys post-rotation (Sept 2); QC grader top of Studio queue; rt-texture-apply-test / rt-segment-mask-test n8n cleanup pending.
+
+### 2026-11-09
+- Quiet — no repo commits, deploys, or portal tasks. Open items unchanged from 11-08: Section B "Current Version" line stale (reads v1.2.11.3, repo is v1.2.11.4), Supabase key verification, QC grader queue, n8n test-workflow cleanup, memory_search index rebuild.
