@@ -140,3 +140,10 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - design-os: 3 upstream commits by others (a0f56cd height:100vh fix, 2e93410 revert, d93ba54 S17b anon-JWT → publishable-key swap, env-first) auto-deployed via Coolify. Verified live: publishable key in all 11 JS chunks, old anon JWT gone from bundles. Discarded my superseded local scratch swap, pulled to d93ba54; left `lib/supabase.ts.bak-rot20260901` untracked. **Closes the design-os side of the Supabase key-rotation verification carry-over — render-tool side still open.**
 - Coolify API token intermittently 401 "Unauthenticated" (~15:22 through 19:22+ UTC, brief 200 windows reported ~17:25–18:00). All three apps healthy, no pending deploys. Same transient class as 11-08. If still 401 on 11-14 or a deploy request lands → flag Mitch for key rotation (TOOLS.md update is Mitch/Tony only).
 - Otherwise quiet. Carry-overs: Section B "Current Version" reads v1.2.11.3 (repo is v1.2.11.4); render-tool Supabase key verification; QC grader top of Studio queue; n8n test-workflow cleanup; memory_search index rebuild.
+
+### 2026-11-14
+- Quiet day — no repo commits, deploys, or portal tasks; all activity was Coolify-token monitoring.
+- Coolify API 401 FLAPPING, not resolved: brief 200 window ~03:00 UTC, then continuous 401 from 04:22 through 22:22+ (first failure 11-13 ~16:00). Third transient 401 window overall (11-08, 11-13 15:22→17:25, this one) — pattern matches Coolify restart/revalidation windows, not key death.
+- Apps healthy throughout (render 200, os 200, crm 307); no deploy requests pending, nothing blocked.
+- Escalation rule set: flag Mitch only if 401 exceeds 24h continuous (threshold ~04:22 UTC 11-15) or blocks an actual deploy. If a deploy request lands mid-401, retry a few times first — windows are intermittent.
+- Carry-overs: Section B "Current Version" reads v1.2.11.3 (repo is v1.2.11.4); render-tool Supabase key verification; QC grader top of Studio queue; n8n test-workflow cleanup; memory_search index rebuild.
