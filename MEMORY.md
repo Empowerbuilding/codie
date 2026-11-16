@@ -147,3 +147,9 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - Apps healthy throughout (render 200, os 200, crm 307); no deploy requests pending, nothing blocked.
 - Escalation rule set: flag Mitch only if 401 exceeds 24h continuous (threshold ~04:22 UTC 11-15) or blocks an actual deploy. If a deploy request lands mid-401, retry a few times first — windows are intermittent.
 - Carry-overs: Section B "Current Version" reads v1.2.11.3 (repo is v1.2.11.4); render-tool Supabase key verification; QC grader top of Studio queue; n8n test-workflow cleanup; memory_search index rebuild.
+
+### 2026-11-15
+- ⚠️ Coolify 401 ESCALATED TO MITCH at 04:22 UTC — token dead 24h continuous (first failure 11-13 ~16:00; continuous since 11-14 04:22; ~43h total by end of 11-15). No longer transient: key rotation + TOOLS.md update needed (Mitch/Tony only). No deploy trigger/monitoring until fixed.
+- Apps healthy all day (render 200, os 200, crm 307); no deploy requests pending, nothing blocked. 401 persisted through every post-escalation check — awaiting Mitch.
+- Otherwise quiet — no repo commits, deploys, or portal tasks. Anomaly: memory/2026-11-15.md bloated with ~200 duplicate hourly 401-monitor entries (monitor cron double/triple-logging same timestamps) — noise, not signal; full detail not needed.
+- Carry-overs: Section B "Current Version" reads v1.2.11.3 (repo is v1.2.11.4); render-tool Supabase key verification; QC grader top of Studio queue; n8n test-workflow cleanup; memory_search index rebuild. NEW/ACTIVE: Coolify key rotation pending Mitch.
