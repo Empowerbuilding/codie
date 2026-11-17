@@ -153,3 +153,9 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - Apps healthy all day (render 200, os 200, crm 307); no deploy requests pending, nothing blocked. 401 persisted through every post-escalation check — awaiting Mitch.
 - Otherwise quiet — no repo commits, deploys, or portal tasks. Anomaly: memory/2026-11-15.md bloated with ~200 duplicate hourly 401-monitor entries (monitor cron double/triple-logging same timestamps) — noise, not signal; full detail not needed.
 - Carry-overs: Section B "Current Version" reads v1.2.11.3 (repo is v1.2.11.4); render-tool Supabase key verification; QC grader top of Studio queue; n8n test-workflow cleanup; memory_search index rebuild. NEW/ACTIVE: Coolify key rotation pending Mitch.
+
+### 2026-11-16
+- ⚠️ Coolify 401 Day 3 — token dead continuously since 11-14 04:22 (~68h by end of 11-16; ~80h total since first failure 11-13 ~16:00). Escalated to Mitch 11-15 04:22 — still no response. Apps healthy (render 200, os 200, crm 307); no deploy requests pending, nothing blocked.
+- File hygiene: 401-monitor cron spammed ~50 duplicate "(late poll)" entries into memory/2026-11-16.md (several future-dated — loop misbehaving); consolidated to one entry. Same spam pattern in memory/2026-11-15.md (~26KB). Monitor cron needs dedupe/fix (Mitch/Tony).
+- No repo commits, deploys, or portal tasks.
+- Carry-overs unchanged: Section B "Current Version" reads v1.2.11.3 (repo is v1.2.11.4); render-tool Supabase key verification; QC grader top of Studio queue; n8n test-workflow cleanup; memory_search index rebuild. ACTIVE: Coolify key rotation pending Mitch (Day 3).
