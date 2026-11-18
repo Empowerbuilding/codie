@@ -144,3 +144,8 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - File hygiene: 401-monitor cron spammed ~50 duplicate "(late poll)" entries into memory/2026-11-16.md (several future-dated — loop misbehaving); consolidated to one entry. Same spam pattern in memory/2026-11-15.md (~26KB). Monitor cron needs dedupe/fix (Mitch/Tony).
 - No repo commits, deploys, or portal tasks.
 - Carry-overs unchanged: Section B "Current Version" reads v1.2.11.3 (repo is v1.2.11.4); render-tool Supabase key verification; QC grader top of Studio queue; n8n test-workflow cleanup; memory_search index rebuild. ACTIVE: Coolify key rotation pending Mitch (Day 3).
+
+### 2026-11-17
+- ⚠️ Coolify 401 Day 4 — token dead continuously since 11-14 04:22 (~92h by end of day; ~104h total since first failure 11-13 ~16:00). Escalated to Mitch 11-15 04:22 — no response across 4 days. Apps healthy (render 200, os 200, crm 307); no deploy requests pending, nothing blocked.
+- No repo commits, deploys, or portal tasks. MEMORY.md hit 15,245 → consolidated to 14,790 (under cap). 401-monitor cron still hourly-logging each check — daily log is mostly duplicate monitor entries.
+- Carry-overs unchanged: Section B "Current Version" reads v1.2.11.3 (repo is v1.2.11.4); render-tool Supabase key verification; QC grader top of Studio queue; n8n test-workflow cleanup; memory_search index rebuild. ACTIVE: Coolify key rotation pending Mitch (Day 4, no response).
