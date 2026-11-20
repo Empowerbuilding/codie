@@ -90,21 +90,10 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 
 ## SECTION D — RECENT SESSION NOTES (Trimmable — HARD CAP 16k, condense entries older than 14 days to 1-2 lines; full detail in git history + memory/*.md)
 
-## Rollup: July → 2026-10-17 (condensed 2026-11-08 — full detail in git history + memory/*.md)
-- **July → 08-20**: Render Tool feature run-up — Edit/Square Up tab, Texture Creator, 8/8 frontend overhaul + nginx, view-angle presets, video tab
-- **08-21**: All-day Render Tool session w/ Michael — v1.1.7.2 → v1.2.4.5, 2K images across 5 image workflows
-- **08-22**: 17-round texture/edit-workflow R&D marathon; findings locked in RENDER-WORKFLOW-BUILD-SPEC.md
-- **08-23**: Workflow research rounds 18-20 concluded + STUDIO TAB v1 SHIPPED (maca profile, vision site-spec flow)
-- **08-24**: Studio v1.2.6.x/v1.2.7.x rapid iteration + Meta lead form routing (form 1379082134439027 → n8n mzGGN4R1Cb95eSGD) + Remodel realism fix
-- **08-25**: Checkpoint melt SOLVED — pure recipe replay (v1.2.7.3 → v1.2.9.2), TEXTURE LOCK pixel-faithful
-- **08-26**: SMS dedupe + phone-only lead fixes; stock-plans "spam" investigation; v1.2.9.2 layout-spec vision workflow (materials & finishes)
-- **08-27 → 09-01**: quiet — memory maintenance only
-- **09-02**: Orbit keyframes — AI end frames shipped (v1.2.10.1-.2)
-- **09-03 → 09-13**: quiet — no repo commits
-- **09-15 → 09-16**: Library → Studio handoff SHIPPED (v1.2.11.1)
-- **09-17 → 10-01**: quiet — no repo work, deploys, or portal tasks (consolidation commits only)
-- **10-02 → 10-03**: quiet — no repo/portal activity; ✅ nightly push to `Empowerbuilding/codie` RESOLVED 10-02 (July 403 / diverged-histories carry-over closed — remote master = local = `b94f651`)
-- **10-04 → 10-17**: quiet — no repo work, deploys, or portal tasks; memory housekeeping only. 10-16: MEMORY.md consolidated 41.8k → 15.6k + AGENTS.md 16k hard-cap rule added (Tony applied / Mitch authorized).
+## Rollup: July → 2026-10-17 (re-condensed 2026-11-20 — full detail in git history + memory/*.md)
+- **July → 08-26**: Render Tool feature run-up — Studio tab v1 (08-23), checkpoint-melt fix + TEXTURE LOCK (08-25), 2K images, Meta lead-form routing, SMS dedupe; v1.1.7.2 → v1.2.9.2
+- **09-02**: Orbit keyframes AI end frames (v1.2.10.x); **09-15/16**: Library → Studio handoff (v1.2.11.1)
+- **09-17 → 10-17**: mostly quiet — no deploys/portal tasks; nightly-push 403 carry-over closed 10-02; 10-16 MEMORY.md 41.8k → 15.6k + AGENTS.md 16k hard-cap rule (Tony/Mitch)
 
 ### 2026-11-07
 - Quiet. Carry-overs then: TOOLS.md n8n key dead (Mitch refresh); Supabase key verification; QC grader; n8n test-workflow cleanup.
@@ -155,3 +144,9 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - Phase 4 optional: vision pins (analyze-style + video scene analysis → 3.8-flash or 4-hydrogen; studio-layout-spec flash-latest). TOOLS.md model line stale for enhance (Mitch/Tony apply).
 - ⚠️ Coolify 401 Day 5 — ~116h continuous since 11-14 04:22; escalated 11-15, no response; apps healthy, nothing blocked. (03:00 "200" was a flap — same pattern as 11-14.)
 - Carry-overs: Section B version line (repo v1.2.11.4); Supabase key rotation (now confirmed stale); QC grader; n8n test cleanup; memory_search index; Coolify key (Day 5); Tony gateway-model fix.
+
+### 2026-11-19
+- Quiet — no repo commits, deploys, or portal tasks (only memory-file writes).
+- ⚠️ Coolify 401 Day 6 — dead continuously since 11-14 04:22 (~144h continuous; ~156h total since first failure 11-13 ~16:00). Escalated to Mitch 11-15 04:22 — no response in 6 days. Apps healthy (render 200, os 200, crm 307); no deploy requests pending, nothing blocked.
+- Tony model-swap request still pending (sent 11-18 18:55).
+- Carry-overs unchanged: Section B version line (repo v1.2.11.4); render-tool Supabase key rotation; QC grader; n8n test cleanup; memory_search index; Coolify key (Day 6); Tony gateway-model fix.
