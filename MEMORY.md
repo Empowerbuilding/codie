@@ -90,21 +90,16 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 
 ## SECTION D — RECENT SESSION NOTES (Trimmable — HARD CAP 16k, condense entries older than 14 days to 1-2 lines; full detail in git history + memory/*.md)
 
-## Rollup: July → 2026-10-17 (re-condensed 2026-11-20 — full detail in git history + memory/*.md)
+## Rollup: July → 2026-11-12 (re-condensed 2026-11-21 — full detail in git history + memory/*.md)
 - **July → 08-26**: Render Tool feature run-up — Studio tab v1 (08-23), checkpoint-melt fix + TEXTURE LOCK (08-25), 2K images, Meta lead-form routing, SMS dedupe; v1.1.7.2 → v1.2.9.2
 - **09-02**: Orbit keyframes AI end frames (v1.2.10.x); **09-15/16**: Library → Studio handoff (v1.2.11.1)
 - **09-17 → 10-17**: mostly quiet — no deploys/portal tasks; nightly-push 403 carry-over closed 10-02; 10-16 MEMORY.md 41.8k → 15.6k + AGENTS.md 16k hard-cap rule (Tony/Mitch)
-
-### 2026-11-07
-- Quiet. Carry-overs then: TOOLS.md n8n key dead (Mitch refresh); Supabase key verification; QC grader; n8n test-workflow cleanup.
+- **11-07 → 11-12**: quiet — no commits/deploys/portal tasks; only consolidation commits (`80b8aa0`, `073573a`)
 
 ### 2026-11-08 (Omni video migration — full detail in memory/2026-11-08.md)
 - Veo 3.1 sunset killed all 4 RT video workflows → overnight Omni Interactions rebuild (architecture in Section B); Tony verified version pointers in DB. My migration script wrote FLAT connections → instant 500s, fixed via `scripts/repair_connections.py`. All 4 + start-end keyframe E2E-verified (40-75s each). Backups: `backups/n8n-video-migration-20261108/` (gitignored). v1.2.11.3 shipped (`09900e6`).
 - Analyze Style workflow found inactive since 09-02 → reactivated + smoke-tested. Legacy non-RT video workflows still on dead Veo — Mitch to deactivate.
 - ~14:45 (Michael): mobile-Safari version-badge overlap fixed → **v1.2.11.4** (`411ea62`, deploy finished; Section B version line still stale). Michael locked video deliverable default: **9:16 mobile @ 8s** (Canvas UI, QC defaults).
-
-### 2026-11-09 → 11-12 (quiet — detail in memory/*.md)
-- Four consecutive quiet days — no repo commits, deploys, or portal tasks; working tree clean. Repo activity: CRM last touched 10-17, barnhaus-design-os 07-02, render-tool 11-08. Consolidation commits `80b8aa0` (11-09), `073573a` (11-11). Carry-overs unchanged from 11-08 list (version line, Supabase keys, QC grader, n8n cleanup, memory_search index).
 
 ### 2026-11-13
 - design-os: 3 upstream commits by others (a0f56cd height:100vh fix, 2e93410 revert, d93ba54 S17b anon-JWT → publishable-key swap, env-first) auto-deployed via Coolify. Verified live: publishable key in all 11 JS chunks, old anon JWT gone from bundles. Discarded my superseded local scratch swap, pulled to d93ba54; left `lib/supabase.ts.bak-rot20260901` untracked. **Closes the design-os side of the Supabase key-rotation verification carry-over — render-tool side still open.**
@@ -150,3 +145,10 @@ Keys stored locally in `memory/credentials.md` (gitignored — do not put raw ke
 - ⚠️ Coolify 401 Day 6 — dead continuously since 11-14 04:22 (~144h continuous; ~156h total since first failure 11-13 ~16:00). Escalated to Mitch 11-15 04:22 — no response in 6 days. Apps healthy (render 200, os 200, crm 307); no deploy requests pending, nothing blocked.
 - Tony model-swap request still pending (sent 11-18 18:55).
 - Carry-overs unchanged: Section B version line (repo v1.2.11.4); render-tool Supabase key rotation; QC grader; n8n test cleanup; memory_search index; Coolify key (Day 6); Tony gateway-model fix.
+
+### 2026-11-20
+- Quiet — no repo commits, deploys, or portal tasks (only memory-file writes).
+- ⚠️ Coolify 401 Day 7 — dead continuously since 11-14 04:22 (~167h continuous; ~179h total since first failure 11-13 ~16:00). Escalated to Mitch 11-15 04:22 — no response in 7 days. Apps healthy (render 200, os 200, crm 307); no deploy requests pending, nothing blocked.
+- Discrepancy: nightly monitor logged 200 at 03:02 UTC (claimed RESOLVED) but all direct checks 03:22→23:22 still 401 — monitor may use different token/endpoint, or brief ~03:00 flap window. Outage note kept OPEN.
+- Tony model-swap request still pending (sent 11-18 18:55).
+- Carry-overs unchanged: Section B version line (repo v1.2.11.4); render-tool Supabase key rotation; QC grader; n8n test cleanup; memory_search index; Coolify key (Day 7); Tony gateway-model fix.
